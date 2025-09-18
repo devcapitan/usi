@@ -1,0 +1,232 @@
+<!-- ========== Temario con Acordeón Exclusivo (profesional, tipografía unificada) ========== -->
+<section role="region" aria-label="Temario del curso"
+  style="--brand:#1d4ed8; --brand2:#0ea5e9; --ink:#0f172a; --muted:#475569; --ring:#e5e7eb; --bg:#ffffff; --w-base:500; --w-head:700; --w-btn:600; font-family: system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif; color:var(--ink); max-width:1100px; margin:24px auto; padding:0 16px;">
+
+  <!-- Encabezado -->
+  <header style="background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; border-radius:16px; padding:22px 20px; box-shadow:0 8px 24px rgba(2,6,23,.18);">
+    <h1 style="margin:0 0 8px; font-size:clamp(1.05rem,2.6vw,1.55rem); line-height:1.25; font-weight:var(--w-head); letter-spacing:.2px;">
+      Actualización docente afín al nuevo sistema educativo mexicano
+    </h1>
+    <p style="margin:0; opacity:.95; font-weight:var(--w-base);">Horas: 160</p>
+  </header>
+
+  <!-- Kicker -->
+  <p style="margin:12px 2px 6px; color:var(--muted); font-weight:var(--w-base);">Estructura del curso</p>
+
+  <!-- Estilos -->
+  <style>
+    .acc-card{border:1px solid var(--ring); border-radius:14px; background:#fff; box-shadow:0 6px 18px rgba(2,6,23,.06); overflow:hidden; margin:14px 0 16px}
+    .acc-btn{width:100%; text-align:left; background:#fff; padding:16px 16px; display:flex; align-items:center; gap:12px; border:0; cursor:pointer; font-weight:var(--w-btn); font-size:1rem; color:var(--ink); letter-spacing:.1px}
+    .acc-btn:hover{background:#f8fafc}
+    .badge{display:inline-flex; width:30px; height:30px; align-items:center; justify-content:center; border-radius:10px; background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; font-weight:var(--w-head)}
+    .acc-arrow{margin-left:auto; transition:transform .25s ease; opacity:.85}
+    .acc-btn[aria-expanded="true"] .acc-arrow{transform:rotate(90deg)}
+    .acc-content{max-height:0; overflow:hidden; transition:max-height .35s ease, opacity .25s ease; opacity:.0; background:#fcfcfd; border-top:1px dashed var(--ring)}
+    .acc-inner{padding:18px 20px; font-weight:var(--w-base)}
+    .block-title{margin:0 0 8px; font-weight:var(--w-head); color:#0f172a}
+    .plain{list-style:none; padding-left:0; margin:.35rem 0 .9rem 0}
+    .plain li{margin:.35rem 0}
+    .indent{margin-left:1.2rem}
+    .res a{color:#1d4ed8; text-decoration:none}
+    .res a:hover{text-decoration:underline}
+  </style>
+
+  <!-- Script acordeón exclusivo (una semana abierta a la vez) -->
+  <script>
+    (function(){
+      function closeAll(except){
+        document.querySelectorAll('[data-acc-content]').forEach(function(p){
+          if(p!==except){
+            p.style.maxHeight='0px';
+            p.style.opacity='.0';
+            const b=p.previousElementSibling;
+            if(b?.hasAttribute('aria-expanded')) b.setAttribute('aria-expanded','false');
+          }
+        });
+      }
+      document.addEventListener('click', function(e){
+        const btn=e.target.closest('[data-accordion]'); if(!btn) return;
+        const panel=btn.nextElementSibling; const open=btn.getAttribute('aria-expanded')==='true';
+        if(!open){ btn.setAttribute('aria-expanded','true'); panel.style.maxHeight=panel.scrollHeight+'px'; panel.style.opacity='1'; closeAll(panel); }
+        else{ btn.setAttribute('aria-expanded','false'); panel.style.maxHeight='0px'; panel.style.opacity='.0'; }
+      });
+      window.addEventListener('load', function(){
+        const first=document.querySelector('[data-accordion]'); if(!first) return;
+        const p=first.nextElementSibling; first.setAttribute('aria-expanded','true'); p.style.maxHeight=p.scrollHeight+'px'; p.style.opacity='1'; closeAll(p);
+      });
+      window.addEventListener('resize', function(){
+        document.querySelectorAll('[data-acc-content]').forEach(function(p){
+          if(p.previousElementSibling?.getAttribute('aria-expanded')==='true'){ p.style.maxHeight=p.scrollHeight+'px'; }
+        });
+      });
+    })();
+  </script>
+
+  <!-- ===================== Semana 1 ===================== -->
+  <article class="acc-card">
+    <button class="acc-btn" data-accordion aria-expanded="false" aria-controls="sem1">
+      <span class="badge" aria-hidden="true">1</span>
+      <span>Semana 1</span>
+      <span class="acc-arrow" aria-hidden="true">▸</span>
+    </button>
+    <div id="sem1" class="acc-content" data-acc-content>
+      <div class="acc-inner">
+        <!-- ===== Módulo 1 ===== -->
+        <p class="block-title">Módulo 1. Fundamentos de la Nueva Escuela Mexicana</p>
+
+        <p class="block-title" style="margin-top:14px">Objetivos:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Comprender los principios filosóficos, jurídicos y pedagógicos de la NEM.</li>
+          <li>•&nbsp;Analizar los ejes articuladores y campos formativos del marco curricular 2022.</li>
+        </ul>
+
+        <p class="block-title">Temas:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Marco legal y filosófico de la NEM.</li>
+          <li>•&nbsp;Educación humanista y comunitaria.</li>
+          <li>•&nbsp;Ejes articuladores y transversalidad.</li>
+        </ul>
+
+        <p class="block-title">Actividades:</p>
+        <ol class="plain indent res">
+          <li>1.&nbsp;Realiza el análisis de documentos oficiales. Realiza la lectura critica de los siguientes recursos, enfócate en los tres temas que se anuncian en este primer módulo. <br>
+            Lectura 1. LA NUEVA ESCUELA MEXICANA Y SU IMPACTO EN LA SOCIEDAD <br>
+            <a href="https://educacionbasica.sep.gob.mx/wp-content/uploads/2024/05/La-NEM-y-su-impacto-en-la-sociedad.pdf" target="_blank" rel="noopener">https://educacionbasica.sep.gob.mx/wp-content/uploads/2024/05/La-NEM-y-su-impacto-en-la-sociedad.pdf</a><br>
+            Lectura 2. Plan de Estudio para la Educación Preescolar, Primaria y Secundaria 2022 <br>
+            <a href="https://educacionbasica.sep.gob.mx/wp-content/uploads/2024/06/Plan-de-Estudio-ISBN-ELECTRONICO.pdf" target="_blank" rel="noopener">https://educacionbasica.sep.gob.mx/wp-content/uploads/2024/06/Plan-de-Estudio-ISBN-ELECTRONICO.pdf</a><br>
+            Lectura 3. Los ejes articuladores: pensar desde nuestra diversidad. Fascículo 4 <br>
+            <a href="https://www.mejoredu.gob.mx/images/publicaciones/fasciculo4_aprendamos-comunidad.pdf" target="_blank" rel="noopener">https://www.mejoredu.gob.mx/images/publicaciones/fasciculo4_aprendamos-comunidad.pdf</a>
+          </li>
+          <li>2.&nbsp;Posteriormente realizar una publicación en el foro, en la que transmitas tu interpretación personal sobre los retos y oportunidades de la nueva escuela mexicana, relacionando a tu práctica docente. </li>
+          <li>3.&nbsp;Videos sugeridos que corresponden a los 7 ejes articuladores de la Nueva Escuela Mexicana: <br>
+            Eje articulador Inclusión. <a href="https://youtu.be/QRx7ROrcqgk" target="_blank" rel="noopener">https://youtu.be/QRx7ROrcqgk</a><br>
+            Eje articulador Pensamiento crítico. <a href="https://youtu.be/zL381b389WA" target="_blank" rel="noopener">https://youtu.be/zL381b389WA</a><br>
+            Eje articulador Interculturalidad crítica. <a href="https://youtu.be/M6sszIulDJc" target="_blank" rel="noopener">https://youtu.be/M6sszIulDJc</a><br>
+            Eje articulador Igualdad de género. <a href="https://youtu.be/_299A9BcuHY" target="_blank" rel="noopener">https://youtu.be/_299A9BcuHY</a><br>
+            Eje articulador Vida saludable. <a href="https://youtu.be/dz_Dvq6JJ8g" target="_blank" rel="noopener">https://youtu.be/dz_Dvq6JJ8g</a><br>
+            Eje articulador Apropiación de las culturas a través de la lectura y la escritura. <a href="https://youtu.be/C5KnXeSOSdE" target="_blank" rel="noopener">https://youtu.be/C5KnXeSOSdE</a><br>
+            Eje articulador Artes y experiencias estéticas. <a href="https://youtu.be/9rHxEiQabIY" target="_blank" rel="noopener">https://youtu.be/9rHxEiQabIY</a>
+          </li>
+          <li>4.&nbsp;Con la información obtenida en la actividad anterior, elaborar un mapa conceptual de ejes y campos en la aplicación de tu preferencia y guarda el archivo en formato PDF para su entrega.</li>
+        </ol>
+
+        <!-- ===== Módulo 2 ===== -->
+        <p class="block-title" style="margin-top:18px;">Módulo 2. Diseño de planeaciones con enfoque NEM</p>
+
+        <p class="block-title" style="margin-top:14px">Objetivos:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Diseñar planeaciones contextualizadas basadas en proyectos y situaciones de aprendizaje.</li>
+          <li>•&nbsp;Integrar saberes de los campos formativos en actividades interdisciplinarias.</li>
+        </ul>
+
+        <p class="block-title">Temas:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Metodologías para el trabajo por proyectos. </li>
+          <li>•&nbsp;Planeación estratégica y flexible.</li>
+          <li>•&nbsp;Integración curricular. Contextualización y codiseño de contenidos. </li>
+        </ul>
+
+        <p class="block-title">Actividades:</p>
+        <ol class="plain indent res">
+          <li>1.&nbsp;Analizar los textos “La enseñanza por proyectos: una metodología necesaria para los futuros docentes”. <a href="https://www.redalyc.org/pdf/310/31043005022.pdf" target="_blank" rel="noopener">https://www.redalyc.org/pdf/310/31043005022.pdf</a>. “Pensamiento crítico: diversidad, libertad e integración de saberes” <a href="https://www.mejoredu.gob.mx/images/publicaciones/boletin-3/boleti%CC%81n31-2024.pdf" target="_blank" rel="noopener">https://www.mejoredu.gob.mx/images/publicaciones/boletin-3/boleti%CC%81n31-2024.pdf</a></li>
+          <li>2.&nbsp;Partiendo de la lectura “EL TRABAJO POR PROYECTOS EN LA NUEVA ESCUELA MEXICANA; ¿UNA ALTERNATIVA METODOLÓGICA INNOVADORA?” <a href="https://revista.ciinsev.com/assets/pdf/revistas/REVISTA15/2.pdf?utm" target="_blank" rel="noopener">https://revista.ciinsev.com/assets/pdf/revistas/REVISTA15/2.pdf?utm</a> elaborar una infografía donde especifiques las metodologías propuestas por el plan de estudios 2022, utilizar la aplicación de tu preferencia y guarda el archivo en formato PDF para su entrega.</li>
+          <li>3.&nbsp;Los campos formativos en actividades interdisciplinarias. Realizar la lectura “Los campos formativos para comprender y transformar nuestra realidad. Fascículo 3”. <br>
+            <a href="https://www.mejoredu.gob.mx/images/publicaciones/fasciculo3_aprendamos-comunidad.pdf" target="_blank" rel="noopener">https://www.mejoredu.gob.mx/images/publicaciones/fasciculo3_aprendamos-comunidad.pdf</a>
+          </li>
+          <li>4.&nbsp;Realizar un ejercicio de contextualización y codiseño de contenidos, tomando como base los aportes de los campos formativos y relacionándolos con una situación identificada en el contexto escolar de tu comunidad. Elabora el trabajo en el procesador de texto de tu preferencia y guárdalo en formato PDF para su entrega.</li>
+        </ol>
+
+        <p class="block-title">Videos sugeridos:</p>
+        <div class="indent res" style="line-height:1.65;">
+          Experiencia de Codiseño e Integración Curricular. <br>
+          Educación Inicial. <a href="https://youtu.be/dyVsBZTuOVQ?si=NGlljbYfa6IueKKq" target="_blank" rel="noopener">https://youtu.be/dyVsBZTuOVQ?si=NGlljbYfa6IueKKq</a> <br>
+          Educación Preescolar. <a href="https://youtu.be/nkCpWXCRKhk?si=BoShFg9STuLQqfh-" target="_blank" rel="noopener">https://youtu.be/nkCpWXCRKhk?si=BoShFg9STuLQqfh-</a> <br>
+          Educación Primaria. <a href="https://youtu.be/bztIu0j3YKo?si=ab1FlxgG9g_Zqptw" target="_blank" rel="noopener">https://youtu.be/bztIu0j3YKo?si=ab1FlxgG9g_Zqptw</a> <br>
+          Educación secundaria. <a href="https://youtu.be/fsPHKhnd9rU?si=H_WQHR3nbzLHkCh4" target="_blank" rel="noopener">https://youtu.be/fsPHKhnd9rU?si=H_WQHR3nbzLHkCh4</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===================== Semana 2 ===================== -->
+  <article class="acc-card">
+    <button class="acc-btn" data-accordion aria-expanded="false" aria-controls="sem2">
+      <span class="badge" aria-hidden="true">2</span>
+      <span>Semana 2</span>
+      <span class="acc-arrow" aria-hidden="true">▸</span>
+    </button>
+    <div id="sem2" class="acc-content" data-acc-content>
+      <div class="acc-inner">
+        <!-- ===== Módulo 3 ===== -->
+        <p class="block-title">Módulo 3. Evaluación formativa y retroalimentación efectiva. </p>
+
+        <p class="block-title" style="margin-top:14px">Objetivos:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Implementar estrategias de evaluación formativa.</li>
+          <li>•&nbsp;Utilizar herramientas para seguimiento del aprendizaje.</li>
+        </ul>
+
+        <p class="block-title">Temas:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Conceptos clave de la evaluación formativa.</li>
+          <li>•&nbsp;Retroalimentación continua y personalizada.</li>
+          <li>•&nbsp;Autoevaluación y coevaluación.</li>
+        </ul>
+
+        <p class="block-title">Actividades:</p>
+        <ol class="plain indent res">
+          <li>1.&nbsp;Analizar los videos: <br>
+            “Instrumentos de evaluación formativa. Plan de estudios 2011” <a href="https://youtu.be/aYQ7-joMq6g?si=3f5hQtcBBpOPK_xy" target="_blank" rel="noopener">https://youtu.be/aYQ7-joMq6g?si=3f5hQtcBBpOPK_xy</a> <br>
+            “Evaluación Formativa Díaz-Barriga. Plan de estudios 2022” <a href="https://youtu.be/1Q9QmrEZT6M?si=nfuV_OoOUDdD8jeC" target="_blank" rel="noopener">https://youtu.be/1Q9QmrEZT6M?si=nfuV_OoOUDdD8jeC</a> <br>
+            “La evaluación formativa es un reto pedagógico-didáctico en el trabajo docente” <br>
+            <a href="https://gestion.cte.sep.gob.mx/insumos/docs/2324_s5_La_evaluacion_formativa_reto_pedagogico_didactico.pdf?1755055265830" target="_blank" rel="noopener">https://gestion.cte.sep.gob.mx/insumos/docs/2324_s5_La_evaluacion_formativa_reto_pedagogico_didactico.pdf?1755055265830</a>
+          </li>
+          <li>2.&nbsp;Elabora una infografía comparativa que detalle las similitudes y diferencias entre los enfoques de evaluación formativa presentados en el Plan de estudios 2011 y el Plan de estudios 2022. La infografía debe incluir:<br>
+            Principales características de la evaluación formativa en cada plan de estudios.<br>
+            Enfoques pedagógicos y metodológicos propuestos.<br>
+            Instrumentos y estrategias de evaluación sugeridos.<br>
+            Rol del docente y del estudiante en el proceso evaluativo.
+          </li>
+        </ol>
+
+        <!-- ===== Módulo 4 ===== -->
+        <p class="block-title" style="margin-top:18px;">Módulo 4. Competencias socioemocionales y el clima escolar.</p>
+
+        <p class="block-title" style="margin-top:14px">Objetivos:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Fortalecer habilidades socioemocionales en la práctica docente.</li>
+          <li>•&nbsp;Mejorar la convivencia escolar y resolución de conflictos.</li>
+        </ul>
+
+        <p class="block-title">Temas:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Autoconocimiento y autocontrol emocional.</li>
+          <li>•&nbsp;Comunicación asertiva y escucha activa.</li>
+          <li>•&nbsp;Mediación y resolución pacífica de conflictos.</li>
+        </ul>
+
+        <p class="block-title">Actividades:</p>
+        <ol class="plain indent res">
+          <li>1.&nbsp;Elaborar una reflexión basándose en las siguientes preguntas: ¿Cómo se manifiestan los conflictos en las escuelas?, ¿Qué se hace en las escuelas para resolver los conflictos que se presentan entre el alumnado?, ¿Con qué recursos contamos para contribuir al manejo adecuado de los conflictos en las escuelas?, elabora tu trabajo en el procesador de texto que prefieras. </li>
+          <li>2.&nbsp;Realizar la lectura sugerida “Resolución de Conflictos en los Centros Escolares”. <a href="https://educacionbasica.sep.gob.mx/wp-content/uploads/2023/03/Documento-Resolucion-de-conflictos_25_OCT_2022_21_X_27-ALTA.pdf" target="_blank" rel="noopener">https://educacionbasica.sep.gob.mx/wp-content/uploads/2023/03/Documento-Resolucion-de-conflictos_25_OCT_2022_21_X_27-ALTA.pdf</a> </li>
+          <li>3.&nbsp;Diseña un organizador gráfico en el que describas de manera clara y organizada el papel del docente y de la familia en el proceso de resolución de conflictos escolares. Tu organizador debe incluir:<br>
+            Responsabilidades de cada uno (docente y familia).<br>
+            Estrategias que pueden emplear para manejar los conflictos.<br>
+            Acciones concretas que favorezcan una convivencia escolar positiva.<br>
+            Puedes usar cualquier formato visual (mapa conceptual, cuadro sinóptico, infografía, etc.) y elaborarlo en la herramienta digital de tu preferencia. Guarda el archivo en PDF para su entrega.
+          </li>
+        </ol>
+
+        <p class="block-title">Recursos: </p>
+        <div class="indent res" style="line-height:1.65;">
+          Solución de conflictos y comunicación en la familia. <br>
+          <a href="https://www.youtube.com/live/Fxn-iBmKZko?si=vrQAmy_u5xTIMoAy" target="_blank" rel="noopener">https://www.youtube.com/live/Fxn-iBmKZko?si=vrQAmy_u5xTIMoAy</a><br>
+          Conflictos en el aula: Abordajes prácticos de negociación y mediación <br>
+          <a href="https://www.youtube.com/live/BAbdM2u2gvw?si=ZWJ3TEskFRjluOn_" target="_blank" rel="noopener">https://www.youtube.com/live/BAbdM2u2gvw?si=ZWJ3TEskFRjluOn_</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</section>
+<!-- ========== Fin del Temario ========== -->

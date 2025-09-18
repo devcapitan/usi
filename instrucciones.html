@@ -1,0 +1,207 @@
+<!-- ====== INSTRUCCIONES DE REGISTRO Y VALIDACIÓN (Joomla Custom HTML) ====== -->
+<section class="jrg-instrucciones" id="guia-registro" lang="es" aria-label="Guía de registro y validación">
+  <style>
+    /* ====== Estilos encapsulados para evitar conflictos ====== */
+    .jrg-instrucciones{
+      --brand:#0ea5e9;            /* Celeste principal */
+      --brand-2:#22d3ee;          /* Aqua acento */
+      --ink:#0f172a;              /* Texto principal */
+      --muted:#475569;            /* Texto secundario */
+      --bg:#ffffff;               /* Fondo tarjeta */
+      --bg-soft:#f8fafc;          /* Fondo suave */
+      --ok:#16a34a;               /* Verde ok */
+      --warn:#f97316;             /* Naranja aviso */
+      --danger:#ef4444;           /* Rojo error */
+      --radius:16px;
+      --shadow:0 12px 30px rgba(2,8,23,0.08), 0 6px 14px rgba(2,8,23,0.06);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      line-height:1.6;
+    }
+    .jrg-wrap{max-width:1100px;margin:0 auto;padding:28px 18px;}
+    .jrg-card{
+      background:var(--bg);
+      border:1px solid #e2e8f0;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+    .jrg-header{
+      display:flex;align-items:center;gap:14px;margin-bottom:18px;
+    }
+    .jrg-badge{
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#fff;border-radius:999px;padding:6px 12px;font-weight:600;font-size:12px;letter-spacing:.02em;
+    }
+    .jrg-title{font-size:clamp(22px,3vw,30px);margin:2px 0 4px 0;font-weight:800}
+    .jrg-subtitle{color:var(--muted);margin:0 0 8px 0;font-size:clamp(14px,2vw,16px)}
+    .jrg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+    @media (max-width: 820px){.jrg-grid{grid-template-columns:1fr}}
+    .jrg-note{
+      border-left:4px solid var(--warn);
+      background:var(--bg-soft);
+      padding:14px 16px;border-radius:12px;margin:10px 0;color:#78350f
+    }
+    .jrg-note.ok{border-left-color:var(--ok);color:#064e3b}
+    .jrg-steps{list-style:none;margin:14px 0 0 0;padding:0;counter-reset:paso}
+    .jrg-steps li{
+      counter-increment:paso;
+      background:var(--bg);
+      border:1px solid #e2e8f0;
+      border-radius:14px;
+      padding:14px 16px;
+      margin-bottom:12px;
+      display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start
+    }
+    .jrg-steps li::before{
+      content:counter(paso);
+      display:inline-grid;place-items:center;
+      width:34px;height:34px;border-radius:999px;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#fff;font-weight:800
+    }
+    .jrg-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .jrg-btn, .jrg-link-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      text-decoration:none !important;
+      padding:12px 16px;border-radius:12px;
+      font-weight:700;border:1px solid transparent;
+      transition:transform .05s ease, box-shadow .2s ease;
+      pointer-events:auto
+    }
+    .jrg-btn:hover, .jrg-link-btn:hover{transform:translateY(-1px)}
+    .jrg-btn.primary{
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(14,165,233,.25)
+    }
+    .jrg-btn.soft{
+      background:#ecfeff;color:#0e7490;border-color:#a5f3fc
+    }
+    .jrg-btn.warn{background:#fff7ed;color:#9a3412;border-color:#fed7aa}
+    .jrg-list{margin:10px 0 0 0;padding-left:18px}
+    .jrg-small{font-size:13px;color:var(--muted)}
+    .jrg-divider{height:1px;background:#e2e8f0;margin:18px 0;border-radius:999px}
+    .jrg-kicker{font-weight:800;color:#0e7490;margin:0 0 8px 0}
+    .jrg-links .jrg-card{display:flex;flex-direction:column;gap:10px}
+    /* Iconitos (SVG inline) */
+    .jrg-icon{width:18px;height:18px;display:inline-block;flex:0 0 18px}
+  </style>
+
+  <div class="jrg-wrap jrg-card">
+    <div class="jrg-header">
+      <span class="jrg-badge">Centro Regional de Educación Normal</span>
+    </div>
+    <h1 class="jrg-title">Javier Rojo Gómez</h1>
+    <p class="jrg-subtitle">Estimados maestros, les damos la más cordial bienvenida a nuestros cursos.</p>
+
+    <div class="jrg-grid">
+      <!-- Columna 1 -->
+      <div>
+        <div class="jrg-note ok">
+          <strong>Si ya está registrado y tomando un curso, no es necesario registrarse de nuevo.</strong>
+        </div>
+
+        <p>
+          Le recomendamos ver los <strong>videotutoriales</strong> antes de registrarse; le ayudarán a entender cómo funciona la plataforma.
+        </p>
+
+        <div class="jrg-actions">
+          <a class="jrg-btn primary" href="https://www.crenjrg.edu.mx/index.php/tutorialesdecapacitacion" target="_blank" rel="noopener noreferrer" title="Abrir videotutoriales en una nueva pestaña">
+            <!-- ▶ icon -->
+            <svg class="jrg-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7L8 5z"/></svg>
+            Ver videotutoriales
+          </a>
+        </div>
+
+        <div class="jrg-divider"></div>
+
+        <h3 class="jrg-kicker">Registro (solo una vez)</h3>
+        <p>
+          El registro en la plataforma <strong>solo se hace una vez</strong>, sin importar cuántos cursos tome.
+        </p>
+        <ul class="jrg-list">
+          <li>Regístrese con sus <strong>datos personales según su INE</strong>. Es fundamental capturar la información correcta y completa.</li>
+          <li>La plataforma utilizará esos datos para generar su <strong>constancia</strong> (si aprueba el curso).</li>
+          <li>Si se confunde con su nombre, podrá <strong>editarlo desde su perfil</strong>. Se recomienda hacer el cambio <u>antes</u> de generar su constancia.</li>
+          <li>La corrección por error de datos puede tardar de <strong>15 a 20 días hábiles</strong>.</li>
+        </ul>
+
+        <div class="jrg-actions" style="margin-top:10px">
+          <a class="jrg-btn soft" href="https://cursos.crenjrg.edu.mx/login/signup.php" target="_blank" rel="noopener noreferrer" title="Abrir formulario de registro">
+            <!-- ✍ icon -->
+            <svg class="jrg-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41L18.37 3.29a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            Registrarse en la plataforma
+          </a>
+        </div>
+
+        <div class="jrg-note">
+          <strong>Correo válido:</strong> utilice un correo real y de uso frecuente. Tras registrarse, recibirá un <strong>mensaje de confirmación</strong>. <u>Debe confirmar</u> su cuenta para poder ingresar.
+        </div>
+      </div>
+
+      <!-- Columna 2 -->
+      <div>
+        <h3 class="jrg-kicker">Acceso y matrícula</h3>
+        <ol class="jrg-steps">
+          <li>
+            <div>
+              <strong>Confirme su cuenta</strong> desde el correo que le llegará después de registrarse.
+              <div class="jrg-small">Si no confirma, no podrá entrar a la plataforma.</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              Ingrese a la plataforma y vaya a <strong>Inicio → Seleccione su jornada → Clic en el curso</strong>.
+              <div class="jrg-small">El sistema solicitará una <strong>clave</strong> que se envía por correo al registrarse.</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Nota:</strong> no podrá realizar actividades inmediatamente después de matricularse,
+              <strong>hasta que el profesor le dé de alta</strong> en el contenido.
+            </div>
+          </li>
+          <li>
+            <div>
+              Complete el curso al <strong>100%</strong> y sea <strong>calificado</strong> por el profesor.
+            </div>
+          </li>
+          <li>
+            <div>
+              Al obtener su constancia, realice la <strong>validación</strong> por <u>Folio</u> y por <u>CURP</u>.
+            </div>
+          </li>
+        </ol>
+
+        <div class="jrg-divider"></div>
+
+        <div class="jrg-links">
+          <div class="jrg-card">
+            <strong>Validación por Folio</strong>
+            <div class="jrg-actions">
+              <a class="jrg-btn primary" href="https://cursos.crenjrg.edu.mx/mod/customcert/verify_certificate.php" target="_blank" rel="noopener noreferrer" title="Validar constancia por folio">
+                <!-- 🔎 icon -->
+                <svg class="jrg-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.5 21.5 20 15.5 14zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                Validar por Folio
+              </a>
+            </div>
+          </div>
+
+          <div class="jrg-card">
+            <strong>Validación por CURP</strong>
+            <div class="jrg-actions">
+              <a class="jrg-btn soft" href="https://www.crenjrg.edu.mx/index.php/validacion/validacionporcurp" target="_blank" rel="noopener noreferrer" title="Validar constancia por CURP">
+                <!-- 🆔 icon -->
+                <svg class="jrg-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-3.33 0-10 1.67-10 5v1h20v-1c0-3.33-6.67-5-10-5z"/></svg>
+                Validar por CURP
+              </a>
+            </div>
+          </div>
+
+          <p class="jrg-small"><strong>Nota:</strong> solo se asignarán constancias a quienes <u>aprueben</u> los cursos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ====== / INSTRUCCIONES DE REGISTRO Y VALIDACIÓN ====== -->

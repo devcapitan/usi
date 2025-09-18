@@ -1,0 +1,210 @@
+<!-- === Banner Home · Convocatoria 2025 — RESPONSIVO sin encimar (móvil / tablet / desktop) === -->
+<!-- Añade en tu <head>:
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+-->
+<section role="region" aria-label="Convocatoria 2025"
+  style="--navy:#0b2f6a; --blue:#1d4ed8; --sky:#0ea5e9; --ink:#0f172a; --muted:#475569; --ring:#e5e7eb;
+         --wa:#25D366; --chat:#7c3aed;
+         font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,'Noto Sans',sans-serif;
+         width:100%; max-width:1024px; margin:16px auto; color:var(--ink);">
+
+  <style>
+    /* ===== LAYOUT BASE ===== */
+    .wrap{
+      position:relative; width:100%;
+      border-radius:18px; overflow:hidden; border:1px solid var(--ring);
+      background:linear-gradient(180deg,#ffffff 0%, #f5f7ff 55%, #eef4ff 100%);
+      box-shadow:0 12px 30px rgba(2,6,23,.12);
+      display:grid; grid-template-columns:1.25fr .75fr; min-height:423px; isolation:isolate;
+    }
+    .left{
+      padding:clamp(18px,3.2vw,48px) clamp(16px,3vw,34px);
+      display:flex; flex-direction:column; justify-content:center; gap:12px; z-index:2;
+    }
+
+    /* ===== TIPOGRAFÍA ===== */
+    .kicker{font-size:clamp(11px,1.3vw,13px); font-weight:800; letter-spacing:.28px; color:var(--navy); text-transform:uppercase}
+    .title{margin:0; font-size:clamp(26px,4.2vw,42px); line-height:1; font-weight:900; color:var(--navy)}
+    .subtitle{margin:4px 0 6px; font-size:clamp(16px,2.2vw,22px); font-weight:900; color:#cf0c28}
+    .desc{margin:0; font-size:clamp(14px,1.6vw,16px); line-height:1.72; color:#0f172a; font-weight:600; max-width:66ch}
+
+    /* ===== BOTONES PRINCIPALES ===== */
+    .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:12px}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; text-decoration:none; border-radius:12px;
+      padding:12px 16px; font-weight:900; font-size:clamp(13px,1.6vw,14px);
+      transition:transform .15s ease, box-shadow .15s ease, filter .15s;
+    }
+    .btn:hover{transform:translateY(-1px); filter:saturate(1.06)}
+    .btn-outline{background:#fff; color:var(--blue); border:2px solid var(--blue)}
+    .btn-primary{background:linear-gradient(135deg,var(--blue),var(--sky)); color:#fff; border:1px solid rgba(255,255,255,.7); box-shadow:0 8px 18px rgba(2,6,23,.15)}
+    .btn svg{display:block}
+
+    /* ===== COLUMNA DERECHA: IMAGEN + EFECTOS ===== */
+    .media{position:relative; overflow:hidden; z-index:1; background:#0b2f6a; min-height:360px;}
+    .media__img{
+      position:absolute; inset:0;
+      background-image:url('https://cdn.pixabay.com/photo/2019/05/20/00/50/webinar-4215688_1280.jpg');
+      background-size:cover; background-position:center;
+      transform-origin:60% 40%; animation:kenburns 18s ease-in-out infinite alternate;
+      will-change:transform; filter:saturate(1.03) contrast(1.02);
+    }
+    @keyframes kenburns{from{transform:scale(1)} to{transform:scale(1.06)}}
+    @media (prefers-reduced-motion:reduce){ .media__img{animation:none} }
+
+    .media::before{
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(115% 115% at 100% 0%, rgba(29,78,216,.30) 0%, rgba(29,78,216,0) 55%),
+        linear-gradient(180deg, rgba(14,165,233,.12) 0%, rgba(11,47,106,.40) 100%);
+      mix-blend-mode:overlay; opacity:.9; pointer-events:none;
+    }
+    .media::after{
+      content:""; position:absolute; inset:0;
+      background:radial-gradient(70% 80% at 50% 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,.26) 100%);
+      pointer-events:none;
+    }
+
+    /* Separador (lo ocultamos en móvil para evitar solapes) */
+    .divider{
+      position:absolute; left:-95px; top:-20px; bottom:-20px; width:260px;
+      background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.7));
+      clip-path:polygon(0 0, 100% 0, 65% 100%, 0 100%);
+      border-right:1px solid rgba(15,23,42,.06); z-index:2;
+    }
+    .ring{position:absolute; right:-70px; top:-70px; width:360px; height:360px; border-radius:50%; border:18px solid rgba(255,255,255,.45); z-index:1; pointer-events:none;}
+
+    /* ===== PILLS SOBRE LA IMAGEN ===== */
+    .media-pills-left{
+      position:absolute; left:12px; top:12px; z-index:3;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .info-pill{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+      font-weight:900; font-size:12px; text-decoration:none;
+      background:#ffffff; color:#0b2f6a; border:1px solid #e2e8f0; box-shadow:0 6px 14px rgba(2,6,23,.12);
+    }
+    .info-pill.online{
+      background:linear-gradient(135deg,var(--blue),var(--sky)); color:#fff;
+      border:1px solid rgba(255,255,255,.6); box-shadow:0 8px 18px rgba(2,6,23,.15);
+    }
+
+    /* ===== CONTACTO (CHAT/WHATSAPP) ===== */
+    .contact-under-image{
+      position:absolute; left:50%; transform:translateX(-50%); bottom:16px; z-index:3;
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:center;
+      background:rgba(255,255,255,.82); backdrop-filter:saturate(1.1) blur(8px);
+      border:1px solid rgba(255,255,255,.65); padding:10px 12px; border-radius:14px;
+      box-shadow:0 10px 22px rgba(2,6,23,.18); max-width:min(720px,92%);
+    }
+    .contact-under-image .btn{padding:10px 14px; font-size:13px; border-radius:999px}
+    .btn-wa{background:#fff; color:#0b7a33; border:2px solid var(--wa)}
+    .btn-chat{background:#fff; color:var(--chat); border:2px solid var(--chat)}
+    .btn-chat:hover{box-shadow:0 6px 16px rgba(124,58,237,.25)}
+
+    /* ===== RESPONSIVO: TABLET ===== */
+    @media (max-width: 960px){
+      .wrap{grid-template-columns:1fr 1fr; min-height:420px}
+      .divider{left:-70px; width:220px}
+      .ring{right:-60px; top:-60px; width:300px; height:300px; border-width:16px}
+    }
+
+    /* ===== RESPONSIVO: MÓVIL (¡AQUÍ SE EVITA EL ENCIMADO!) ===== */
+    @media (max-width: 640px){
+      .wrap{grid-template-columns:1fr; min-height:auto}
+      .media{order:-1; min-height:280px}
+      .divider{display:none}
+
+      /* 1) Las pills dejan de ser absolutas y pasan al flujo normal arriba de la imagen */
+      .media-pills-left{
+        position:static !important;   /* <-- clave para no encimar */
+        flex-direction:row; gap:8px; padding:10px; margin:0 auto; width:100%; max-width:560px;
+        justify-content:flex-start;
+      }
+
+      /* 2) El bloque de contacto se hace ESTÁTICO debajo de la imagen */
+      .contact-under-image{
+        position:static !important; transform:none !important;
+        margin:10px auto 8px; width:calc(100% - 24px); max-width:560px;
+        padding:8px 10px; gap:10px;
+      }
+      .contact-under-image .btn{padding:9px 12px; font-size:12px}
+
+      /* 3) Ajustes tipográficos/espaciados para móvil */
+      .left{padding:16px 14px 18px}
+      .cta-row{gap:10px}
+    }
+
+    @media (max-width: 380px){
+      .title{font-size:24px}
+      .subtitle{font-size:15px}
+      .desc{font-size:13.5px}
+      .media{min-height:240px}
+    }
+
+    /* Hover global (solo desktop) */
+    @media (hover:hover){ .wrap:hover{box-shadow:0 16px 36px rgba(2,6,23,.18)} }
+  </style>
+
+  <div class="wrap">
+    <!-- IZQUIERDA -->
+    <div class="left">
+      <span class="kicker">EL CENTRO REGIONAL DE EDUCACIÓN NORMAL JAVIER ROJO GÓMEZ EMITE LA PRESENTE</span>
+      <h1 class="title">CONVOCATORIA 2025</h1>
+      <h2 class="subtitle">CURSOS EXTRACURRICULARES</h2>
+      <p class="desc">
+        Interesados: Egresados y estudiantes de instituciones educativas públicas y particulares, de escuelas normales o de educación superior,
+        interesados en participar en el proceso de admisión de personal docente únicamente para educación básica 2025.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn-outline" href="https://www.crenjrg.edu.mx/index.php/convocatoria-01" target="_blank" rel="noopener" aria-label="Ver convocatoria 2025">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 00-2 2v16c0 1.1.9 2 2 2h12a2 2 0 002-2V8z"/><path fill="#fff" d="M14 2v6h6"/>
+          </svg>
+          Ver convocatoria
+        </a>
+        <a class="btn btn-primary" href="https://www.crenjrg.edu.mx/index.php/registros25" target="_blank" rel="noopener" aria-label="Inscríbete a cursos extracurriculares 2025">
+          Inscríbete
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M13 5l7 7-7 7M5 12h14"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- DERECHA: IMAGEN + PILLS + CONTACTO -->
+    <div class="media" aria-label="Ilustración: asesoría en línea con audífonos">
+      <span class="divider" aria-hidden="true"></span>
+      <span class="ring" aria-hidden="true"></span>
+      <span class="media__img" aria-hidden="true"></span>
+
+      <!-- En desktop: pills flotan; en móvil: pasan arriba, en el flujo -->
+      <div class="media-pills-left">
+        <span class="info-pill" title="Teléfono de contacto">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.6.6 4 .6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C11.4 22 2 12.6 2 1c0-.6.4-1 1-1h4.5c.6 0 1 .4 1 1 0 1.4.2 2.8.6 4 .1.4 0 .8-.3 1.1L6.6 10.8z"/>
+          </svg>
+          983-83-42-682
+        </span>
+        <span class="info-pill online" title="Modalidad en línea">100% en línea</span>
+      </div>
+
+      <!-- En desktop: flotante al fondo; en móvil: debajo de la imagen -->
+      <div class="contact-under-image" role="group" aria-label="Contacto rápido">
+        <a class="btn btn-chat" href="https://soporte.crenjrg.edu.mx/index.php/esp/chat/start/(operator)/3/(department)/DEPARTAMENTO_INFO/(theme)/2" target="_blank" rel="noopener" aria-label="Abrir chat de soporte">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M4 4h16a2 2 0 012 2v9a2 2 0 01-2 2H8l-4 4v-4H4a2 2 0 01-2-2V6a2 2 0 012-2z"/>
+          </svg>
+          Chat en vivo
+        </a>
+        <a class="btn btn-wa" href="https://api.whatsapp.com/message/SZYYVMHJGVA4M1?autoload=1&app_absent=0" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
+            <path d="M34.5 28.5c-.5-.3-3-1.5-3.4-1.7-.4-.1-.7-.3-1 .3-.3.5-1.1 1.7-1.3 2-.2.3-.5.4-1 .1-2.9-1.4-4.8-2.6-6.7-6-.5-.9.5-.8 1.4-2.7.2-.4.1-.7 0-1-.1-.3-1-2.4-1.4-3.3-.4-1-1-1-1.5-1.1h-1.3c-.5 0-1 .5-1 1.1 0 .6-1 2.1-1 5s2.1 5.8 2.4 6.2c.3.4 4.2 6.4 10.3 8.7 6.2 2.3 6.2 1.6 7.3 1.5 1.1-.1 3.6-1.5 4.1-3 .5-1.5.5-2.7.4-3-.1-.3-.4-.4-.9-.7zM24 4C13 4 4 13 4 24c0 3.5.9 6.8 2.6 9.7L4 44l10.6-2.8C17.4 42.9 20.6 44 24 44c11 0 20-9 20-20S35 4 24 4z"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,306 @@
+<!-- ====== MÓDULO: Video Tutoriales (5 módulos) ====== -->
+<section class="vtuts" id="video-tutoriales" aria-label="Video tutoriales">
+  <style>
+    /* ====== Estilos encapsulados para evitar conflictos con Joomla ====== */
+    .vtuts {
+      --brand: #0ea5e9; --brand-2: #22d3ee; --ink: #0f172a; --muted: #475569;
+      --bg: #ffffff; --panel: #f8fafc; --ring: 0 0 0 3px rgba(14,165,233,.18);
+      --shadow: 0 10px 25px rgba(2,8,23,.10), 0 6px 12px rgba(2,8,23,.06);
+      --radius: 16px; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      color: var(--ink);
+    }
+    .vtuts *{ box-sizing: border-box; }
+    .vtuts .wrap{ max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+    /* Header */
+    .vtuts .head{ display:grid; gap:12px; margin-bottom:18px; }
+    .vtuts .title{ font-size:clamp(22px,2.4vw,34px); font-weight:800; letter-spacing:-.01em; display:flex; align-items:center; gap:10px; }
+    .vtuts .chip{ display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; padding:6px 12px; border-radius:999px; font-weight:700; font-size:12px; box-shadow:var(--shadow); }
+    .vtuts .desc{ color:var(--muted); max-width:72ch; }
+
+    /* Controles */
+    .vtuts .controls{ display:grid; grid-template-columns:1fr minmax(180px,220px) auto; gap:12px; margin:16px 0 22px; }
+    @media (max-width:800px){ .vtuts .controls{ grid-template-columns:1fr 1fr; } .vtuts .controls .reset{ grid-column:1 / -1; } }
+    .vtuts .input,.vtuts .select,.vtuts .btn{
+      border-radius:12px; border:1px solid #e2e8f0; background:var(--bg); padding:12px 14px; font:inherit; color:var(--ink);
+      transition: box-shadow .2s, transform .08s, border-color .2s;
+    }
+    .vtuts .input:focus,.vtuts .select:focus{ outline:none; box-shadow:var(--ring); border-color:#bae6fd; }
+    .vtuts .btn{ background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; font-weight:700; cursor:pointer; border:none; }
+    .vtuts .btn:hover{ transform:translateY(-1px); } .vtuts .btn:active{ transform:translateY(0); }
+
+    /* Grid */
+    .vtuts .grid{ display:grid; gap:18px; grid-template-columns:repeat(3,1fr); }
+    @media (max-width:1024px){ .vtuts .grid{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:640px){ .vtuts .grid{ grid-template-columns:1fr; } }
+
+    /* Card */
+    .vtuts .card{ background:var(--bg); border:1px solid #e2e8f0; border-radius:var(--radius); overflow:hidden; box-shadow:0 2px 8px rgba(2,8,23,.04); transition: transform .18s, box-shadow .18s, border-color .18s; }
+    .vtuts .card:hover{ transform:translateY(-2px); border-color:#bae6fd; box-shadow:var(--shadow); }
+
+    /* Miniatura con parche (skeleton + cover + fallback) */
+    .vtuts .thumb{ position:relative; overflow:hidden; background:#0b1220; aspect-ratio:16/9; }
+    .vtuts .thumb::before{ content:""; position:absolute; inset:0; background:linear-gradient(90deg,#0b1220 0%,#111827 50%,#0b1220 100%); animation:vt-skel 1.2s infinite linear; }
+    @keyframes vt-skel{ 0%{filter:brightness(1);} 50%{filter:brightness(1.15);} 100%{filter:brightness(1);} }
+    .vtuts .thumb img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.9) contrast(1.05); transition: transform .35s, filter .35s; }
+    .vtuts .card:hover .thumb img{ transform:scale(1.04); filter:none; }
+    .vtuts .thumb.loaded::before{ display:none; }
+
+    .vtuts .play{ position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; }
+    .vtuts .play svg{ width:56px; height:56px; filter:drop-shadow(0 8px 16px rgba(0,0,0,.35)); opacity:.92; }
+    .vtuts .duration{ position:absolute; right:10px; bottom:10px; background:rgba(0,0,0,.7); color:#fff; font-weight:700; font-size:12px; padding:6px 8px; border-radius:8px; }
+
+    .vtuts .body{ padding:14px; display:grid; gap:10px; }
+    .vtuts .ctitle{ font-weight:800; font-size:16px; line-height:1.3; }
+    .vtuts .meta{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; color:var(--muted); font-size:13px; }
+    .vtuts .tag{ display:inline-flex; align-items:center; gap:6px; background:#eff6ff; color:#1e40af; padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px; }
+
+    .vtuts .actions{ display:flex; gap:10px; margin-top:2px; }
+    .vtuts .action{ flex:1; text-align:center; padding:10px 12px; border-radius:10px; font-weight:800; text-decoration:none; border:1px solid #e2e8f0; color:var(--ink); background:#fff; transition: background .2s, transform .08s, border-color .2s; }
+    .vtuts .action:hover{ background:#f8fafc; transform:translateY(-1px); }
+    .vtuts .action.primary{ border:none; background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; }
+    .vtuts .action.primary:hover{ filter:saturate(1.1); }
+
+    /* Utilidades */
+    .vtuts .hidden{ display:none!important; }
+    .vtuts .center{ text-align:center; }
+    .vtuts .loadmore{ margin-top:18px; display:none; } /* sin “cargar más” porque solo hay 5 */
+
+    /* Modal */
+    .vtuts .modal{ position:fixed; inset:0; display:grid; place-items:center; background:rgba(2,8,23,.66); z-index:9999; padding:24px; opacity:0; pointer-events:none; transition:opacity .2s; }
+    .vtuts .modal.is-open{ opacity:1; pointer-events:auto; }
+    .vtuts .modal-dialog{ width:min(100%,960px); background:#000; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
+    .vtuts .modal-head{ display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:#0b1220; color:#cbd5e1; }
+    .vtuts .modal-title{ font-weight:700; font-size:14px; }
+    .vtuts .modal-close{ background:none; border:none; color:#cbd5e1; font-size:22px; cursor:pointer; line-height:1; }
+    .vtuts .modal-body{ aspect-ratio:16/9; }
+    .vtuts .modal-body iframe{ width:100%; height:100%; display:block; border:0; }
+
+    /* Focus */
+    .vtuts a:focus,.vtuts button:focus{ outline:none; box-shadow:var(--ring); }
+  </style>
+
+  <div class="wrap">
+    <!-- Encabezado -->
+    <div class="head">
+      <div class="title">
+        <span class="chip" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M17 10V7l4-2v10l-4-2v-3ZM3 6a2 2 0 0 1 2-2h6a2 2 0 0 1 1.6.8L14 6h3a2 2 0 0 1 2 2v3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="2" y="7" width="14" height="12" rx="3" fill="white" opacity=".2"/>
+          </svg>
+          TUTORIALES
+        </span>
+        Centro de Video Tutoriales
+      </div>
+      <p class="desc">Explora los tutoriales de la plataforma. Busca por nombre o reproduce sin salir del sitio.</p>
+    </div>
+
+    <!-- Controles (solo categoría “Plataforma”) -->
+    <div class="controls" role="group" aria-label="Controles de filtrado y búsqueda">
+      <input id="vt-search" class="input" type="search" placeholder="Buscar (p. ej., constancias, registro…)" aria-label="Buscar tutorial">
+      <select id="vt-category" class="select" aria-label="Filtrar por categoría">
+        <option value="all" selected>Todas</option>
+        <option value="plataforma">Plataforma</option>
+      </select>
+      <button class="btn reset" type="button" id="vt-reset" aria-label="Limpiar filtros">Limpiar filtros</button>
+    </div>
+
+    <!-- Grid de 5 tarjetas -->
+    <div id="vt-grid" class="grid">
+      <!-- 1) Verificación de constancias -->
+      <article class="card" data-title="Verificación de constancias" data-category="plataforma" data-visible="1">
+        <div class="thumb" data-video-id="e97GgJvNte4" role="button" tabindex="0" aria-label="Reproducir: Verificación de constancias">
+          <img loading="lazy" src="https://i.ytimg.com/vi/e97GgJvNte4/hqdefault.jpg" alt="Miniatura: Verificación de constancias">
+          <div class="play" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" fill="white" opacity=".9"/><path d="M26 22v20l18-10L26 22Z" fill="black"/></svg>
+          </div>
+          <span class="duration">—:—</span>
+        </div>
+        <div class="body">
+          <h3 class="ctitle">Verificación de constancias</h3>
+          <div class="meta"><span class="tag">Plataforma</span><span>• Guía rápida</span></div>
+          <div class="actions">
+            <button class="action primary vt-play" data-video-id="e97GgJvNte4" data-title="Verificación de constancias">Ver tutorial</button>
+            <a class="action" href="https://www.youtube.com/watch?v=e97GgJvNte4" target="_blank" rel="noopener">Abrir en YouTube</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2) Restaurar contraseña -->
+      <article class="card" data-title="Restaurar contraseña" data-category="plataforma" data-visible="1">
+        <div class="thumb" data-video-id="O6I-9doImLc" role="button" tabindex="0" aria-label="Reproducir: Restaurar contraseña">
+          <img loading="lazy" src="https://i.ytimg.com/vi/O6I-9doImLc/hqdefault.jpg" alt="Miniatura: Restaurar contraseña">
+          <div class="play" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" fill="white" opacity=".9"/><path d="M26 22v20l18-10L26 22Z" fill="black"/></svg>
+          </div>
+          <span class="duration">—:—</span>
+        </div>
+        <div class="body">
+          <h3 class="ctitle">Restaurar contraseña</h3>
+          <div class="meta"><span class="tag">Plataforma</span><span>• Acceso</span></div>
+          <div class="actions">
+            <button class="action primary vt-play" data-video-id="O6I-9doImLc" data-title="Restaurar contraseña">Ver tutorial</button>
+            <a class="action" href="https://www.youtube.com/watch?v=O6I-9doImLc&t=1s" target="_blank" rel="noopener">Abrir en YouTube</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3) Descarga de constancias -->
+      <article class="card" data-title="Descarga de constancias" data-category="plataforma" data-visible="1">
+        <div class="thumb" data-video-id="lGU3UKA3BHI" role="button" tabindex="0" aria-label="Reproducir: Descarga de constancias">
+          <img loading="lazy" src="https://i.ytimg.com/vi/lGU3UKA3BHI/hqdefault.jpg" alt="Miniatura: Descarga de constancias">
+          <div class="play" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" fill="white" opacity=".9"/><path d="M26 22v20l18-10L26 22Z" fill="black"/></svg>
+          </div>
+          <span class="duration">—:—</span>
+        </div>
+        <div class="body">
+          <h3 class="ctitle">Descarga de constancias</h3>
+          <div class="meta"><span class="tag">Plataforma</span><span>• Guía</span></div>
+          <div class="actions">
+            <button class="action primary vt-play" data-video-id="lGU3UKA3BHI" data-title="Descarga de constancias">Ver tutorial</button>
+            <a class="action" href="https://www.youtube.com/watch?v=lGU3UKA3BHI&t=5s" target="_blank" rel="noopener">Abrir en YouTube</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4) Activación de curso -->
+      <article class="card" data-title="Activación de curso" data-category="plataforma" data-visible="1">
+        <div class="thumb" data-video-id="WnEnxOcJ5Fg" role="button" tabindex="0" aria-label="Reproducir: Activación de curso">
+          <img loading="lazy" src="https://i.ytimg.com/vi/WnEnxOcJ5Fg/hqdefault.jpg" alt="Miniatura: Activación de curso">
+          <div class="play" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" fill="white" opacity=".9"/><path d="M26 22v20l18-10L26 22Z" fill="black"/></svg>
+          </div>
+          <span class="duration">—:—</span>
+        </div>
+        <div class="body">
+          <h3 class="ctitle">Activación de curso</h3>
+          <div class="meta"><span class="tag">Plataforma</span><span>• Gestión</span></div>
+          <div class="actions">
+            <button class="action primary vt-play" data-video-id="WnEnxOcJ5Fg" data-title="Activación de curso">Ver tutorial</button>
+            <a class="action" href="https://www.youtube.com/watch?v=WnEnxOcJ5Fg&t=2s" target="_blank" rel="noopener">Abrir en YouTube</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5) Registro en la plataforma -->
+      <article class="card" data-title="Registro en la plataforma" data-category="plataforma" data-visible="1">
+        <div class="thumb" data-video-id="7eYCXMq8u3U" role="button" tabindex="0" aria-label="Reproducir: Registro en la plataforma">
+          <img loading="lazy" src="https://i.ytimg.com/vi/7eYCXMq8u3U/hqdefault.jpg" alt="Miniatura: Registro en la plataforma">
+          <div class="play" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" fill="white" opacity=".9"/><path d="M26 22v20l18-10L26 22Z" fill="black"/></svg>
+          </div>
+          <span class="duration">—:—</span>
+        </div>
+        <div class="body">
+          <h3 class="ctitle">Registro en la plataforma</h3>
+          <div class="meta"><span class="tag">Plataforma</span><span>• Alta de usuario</span></div>
+          <div class="actions">
+            <button class="action primary vt-play" data-video-id="7eYCXMq8u3U" data-title="Registro en la plataforma">Ver tutorial</button>
+            <a class="action" href="https://www.youtube.com/watch?v=7eYCXMq8u3U&t=2s" target="_blank" rel="noopener">Abrir en YouTube</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="vt-modal" aria-hidden="true" role="dialog" aria-label="Reproductor de video">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <div class="modal-title" id="vt-modal-title">Reproduciendo…</div>
+        <button class="modal-close" type="button" aria-label="Cerrar" id="vt-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <iframe id="vt-iframe" title="Video en reproducción" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const root = document.currentScript.closest('.vtuts');
+      const grid = root.querySelector('#vt-grid');
+      const search = root.querySelector('#vt-search');
+      const category = root.querySelector('#vt-category');
+      const reset = root.querySelector('#vt-reset');
+
+      const modal = root.querySelector('#vt-modal');
+      const iframe = root.querySelector('#vt-iframe');
+      const closeBtn = root.querySelector('#vt-close');
+      const modalTitle = root.querySelector('#vt-modal-title');
+
+      // Fallback de miniaturas + quitar skeleton cuando cargan
+      (function initThumbs(){
+        const thumbs = root.querySelectorAll('.thumb');
+        thumbs.forEach(thumb => {
+          const img = thumb.querySelector('img');
+          if (!img) return;
+          img.addEventListener('load', () => thumb.classList.add('loaded'), { once:true });
+          img.addEventListener('error', () => {
+            const id = thumb.dataset.videoId; if (!id) return;
+            const fallbacks = [
+              `https://i.ytimg.com/vi/${id}/sddefault.jpg`,
+              `https://i.ytimg.com/vi/${id}/mqdefault.jpg`,
+              `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`
+            ];
+            const next = fallbacks.find(url => url !== img.src);
+            if (next) img.src = next; else thumb.classList.add('loaded');
+          });
+        });
+      })();
+
+      // Búsqueda y filtro
+      function filterItems() {
+        const q = (search.value || '').toLowerCase().trim();
+        const cat = category.value;
+        grid.querySelectorAll('.card').forEach(card => {
+          const title = (card.dataset.title || '').toLowerCase();
+          const ccat = card.dataset.category || 'plataforma';
+          const matchText = !q || title.includes(q);
+          const matchCat = cat === 'all' || cat === ccat;
+          card.style.display = (matchText && matchCat) ? '' : 'none';
+        });
+      }
+      search.addEventListener('input', filterItems);
+      category.addEventListener('change', filterItems);
+      reset.addEventListener('click', () => { search.value=''; category.value='all'; filterItems(); });
+
+      // Modal
+      function openModal(videoId, titleText) {
+        if (!videoId) return;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden','false');
+        modalTitle.textContent = titleText || 'Reproduciendo…';
+        iframe.src = 'https://www.youtube.com/embed/' + encodeURIComponent(videoId) + '?autoplay=1&rel=0';
+      }
+      function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden','true');
+        iframe.src = '';
+      }
+
+      grid.addEventListener('click', (e) => {
+        const el = e.target.closest('.vt-play, .thumb');
+        if (!el) return;
+        const videoId = el.dataset.videoId || el.closest('.card')?.querySelector('.thumb')?.dataset.videoId;
+        const title = el.dataset.title || el.closest('.card')?.querySelector('.ctitle')?.textContent?.trim();
+        openModal(videoId, title);
+      });
+      grid.addEventListener('keydown', (e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('thumb')) {
+          e.preventDefault();
+          const id = e.target.dataset.videoId;
+          const title = e.target.closest('.card')?.querySelector('.ctitle')?.textContent?.trim();
+          openModal(id, title);
+        }
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); });
+    })();
+  </script>
+</section>
+<!-- ====== FIN MÓDULO ====== -->

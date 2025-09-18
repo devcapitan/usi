@@ -1,0 +1,421 @@
+<div id="consulta-certificados" class="ct-box">
+    <h4 class="ct-title">Consulta de Certificados por CURP</h4>
+    
+    <div class="ct-form-group">
+        <label for="curpInput">Ingresa tu CURP:</label>
+        <input type="text" id="curpInput" placeholder="Ej. FOTA990328HHGLLR03" maxlength="18">
+        <button id="consultarBtn">Consultar</button>
+    </div>
+
+    <div id="resultado" class="ct-result" style="display:none;">
+        <div id="user-info" class="ct-user-info mb-3">
+            <p><strong>Nombre:</strong> <span id="fullname"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>CURP:</strong> <span id="curp"></span></p>
+        </div>
+
+        <div id="certificados">
+            <h5>Certificados Emitidos</h5>
+            <table class="ct-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Curso</th>
+                        <th>Folio</th>
+                        <th>Fecha</th>
+                        <th>ID Curso</th>
+                    </tr>
+                </thead>
+                <tbody id="cert-table-body">
+                    <tr><td colspan="5">Cargando...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <button id="imprimirBtn" style="display:none;">Imprimir Resultados</button>
+    </div>
+
+    <div id="error-msg" class="ct-error" style="display:none;"></div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // URLs absolutas HTTPS para las imágenes
+    const urls = {
+        logo: "https://www.crenjrg.edu.mx/images/LOGOS/logo1.png",
+        escudo: "https://www.crenjrg.edu.mx/images/LOGOS/ESCUDOQROO.png",
+        firma: "https://www.crenjrg.edu.mx/images/LOGOS/firma1.jpg"
+    };
+
+    // Precargar imágenes para asegurar disponibilidad
+    function preloadImages() {
+        return new Promise((resolve) => {
+            let loaded = 0;
+            const total = Object.keys(urls).length;
+            
+            Object.values(urls).forEach(url => {
+                const img = new Image();
+                img.src = url;
+                img.onload = img.onerror = () => {
+                    loaded++;
+                    if (loaded === total) resolve();
+                };
+            });
+        });
+    }
+
+    document.getElementById("consultarBtn").addEventListener("click", function() {
+        const curp = document.getElementById("curpInput").value.trim().toUpperCase();
+        const resultado = document.getElementById("resultado");
+        const errorMsg = document.getElementById("error-msg");
+        const tbody = document.getElementById("cert-table-body");
+        const imprimirBtn = document.getElementById("imprimirBtn");
+
+        resultado.style.display = "none";
+        errorMsg.style.display = "none";
+        imprimirBtn.style.display = "none";
+        tbody.innerHTML = "<tr><td colspan='5'>Cargando...</td></tr>";
+
+        if (curp.length !== 18) {
+            errorMsg.textContent = "La CURP debe tener 18 caracteres.";
+            errorMsg.style.display = "block";
+            tbody.innerHTML = "";
+            return;
+        }
+
+        fetch("https://cursos.crenjrg.edu.mx/externals/consulta.php?curp=" + encodeURIComponent(curp))
+            .then(res => {
+                if (!res.ok) throw new Error("Error en la respuesta del servidor");
+                return res.json();
+            })
+            .then(data => {
+                if (!data || !data.user || !data.user.fullname) {
+                    errorMsg.textContent = "No se encontraron datos para la CURP ingresada.";
+                    errorMsg.style.display = "block";
+                    tbody.innerHTML = "";
+                    return;
+                }
+
+                document.getElementById("fullname").textContent = data.user.fullname;
+                document.getElementById("email").textContent = data.user.email;
+                document.getElementById("curp").textContent = data.user.curp;
+
+                tbody.innerHTML = "";
+
+                const certificados = data.user.certificates || data.certificates || [];
+
+                if (certificados.length > 0) {
+                    certificados.forEach((cert, index) => {
+                        const date = new Date(cert.emissiondate * 1000).toLocaleDateString("es-MX");
+                        const row = `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${cert.coursename}</td>
+                                <td>${cert.folio}</td>
+                                <td>${date}</td>
+                                <td>${cert.courseid}</td>
+                            </tr>
+                        `;
+                        tbody.insertAdjacentHTML("beforeend", row);
+                    });
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="5">No se encontraron certificados.</td></tr>`;
+                }
+
+                resultado.style.display = "block";
+                imprimirBtn.style.display = "inline-block";
+            })
+            .catch(error => {
+                errorMsg.textContent = "Ocurrió un error al consultar los datos.";
+                errorMsg.style.display = "block";
+                tbody.innerHTML = "";
+                console.error(error);
+            });
+    });
+
+    document.getElementById("imprimirBtn").addEventListener("click", async function() {
+        // Precargar imágenes antes de generar el PDF
+        await preloadImages();
+        
+        const alumno = document.getElementById("fullname").textContent;
+        const email = document.getElementById("email").textContent;
+        const curp = document.getElementById("curp").textContent;
+        
+        const certificados = [];
+        const filas = document.querySelectorAll("#cert-table-body tr");
+        filas.forEach((fila, index) => {
+            const celdas = fila.querySelectorAll("td");
+            if (celdas.length === 5) {
+                certificados.push({
+                    numero: index + 1,
+                    curso: celdas[1].textContent,
+                    folio: celdas[2].textContent,
+                    fecha: celdas[3].textContent,
+                    idCurso: celdas[4].textContent
+                });
+            }
+        });
+
+        const fecha = new Date();
+        const dia = fecha.getDate();
+        const mes = fecha.toLocaleString('es-MX', { month: 'long' });
+        const año = fecha.getFullYear();
+        const fechaFormateada = `${dia} de ${mes} del ${año}`;
+
+        const ventanaImpresion = window.open("", "_blank");
+        ventanaImpresion.document.write(`
+            <html>
+            <head>
+                <title>Certificados - CREN Javier Rojo Gómez</title>
+                <style>
+                    @page {
+                        margin: 0;
+                        size: A4;
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+                    }
+                    body { 
+                        font-family: Arial, sans-serif; 
+                        padding: 20px 40px; 
+                        color: #000; 
+                        font-size: 12px;
+                        line-height: 1.4;
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+                    }
+                    .encabezado-institucional { 
+                        text-align: center; 
+                        margin-bottom: 15px;
+                        font-weight: bold;
+                        font-size: 14px;
+                    }
+                    .logos {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-bottom: 10px;
+                    }
+                    .logos img {
+                        height: 80px;
+                        margin: 0 15px;
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+                    }
+                    .direccion-fecha {
+                        text-align: center;
+                        margin-bottom: 15px;
+                    }
+                    .destinatario {
+                        margin-bottom: 10px;
+                    }
+                    .contenido-documento {
+                        margin-bottom: 15px;
+                        text-align: justify;
+                    }
+                    .info-alumno { 
+                        margin: 15px 0; 
+                    }
+                    .info-alumno p { 
+                        margin: 3px 0; 
+                    }
+                    .resultados-consulta {
+                        font-weight: bold;
+                        margin: 15px 0 5px 0;
+                    }
+                    table { 
+                        width: 100%; 
+                        border-collapse: collapse; 
+                        margin-top: 10px;
+                        font-size: 11px;
+                    }
+                    th, td { 
+                        border: 1px solid #000; 
+                        padding: 6px 8px; 
+                        text-align: left; 
+                    }
+                    th { 
+                        background-color: #f2f2f2; 
+                        font-weight: bold;
+                    }
+                    .firma {
+                        margin-top: 30px;
+                        text-align: right;
+                    }
+                    .firma img {
+                        height: 60px;
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+                    }
+                    .firma p {
+                        margin: 5px 0;
+                        font-weight: bold;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="encabezado-institucional">
+                    CENTRO REGIONAL DE EDUCACION NORMAL JAVIER ROJO GÓMEZ
+                </div>
+                
+                <div class="logos">
+                    <img src="${urls.logo}" alt="Logo SEP" id="imgLogo">
+                    <img src="${urls.escudo}" alt="Logo CREN" id="imgEscudo">
+                </div>
+                
+                <div class="direccion-fecha">
+                    Bacalar, Quintana Roo, ${fechaFormateada}
+                </div>
+                
+                <div class="destinatario">
+                    LIC. JAVIER ROJO GÓMEZ<br>
+                    PRESENTE
+                </div>
+                
+                <div class="contenido-documento">
+                    <p>El centro regional de educación Normal Javier Rojo Gómez expide el siguiente
+                    documento digital generado desde el sitio web de la institución, con el objetivo de
+                    hacer válido los siguientes cursos que realizó el C. ${alumno}. Con
+                    CURP: ${curp}.</p>
+                </div>
+
+                <div class="resultados-consulta">
+                    Resultados de Consulta
+                </div>
+
+                <div class="info-alumno">
+                    <p><strong>Nombre:</strong> ${alumno}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>CURP:</strong> ${curp}</p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Curso</th>
+                            <th>Folio</th>
+                            <th>Fecha</th>
+                            <th>ID Curso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${certificados.map(cert => `
+                            <tr>
+                                <td>${cert.numero}</td>
+                                <td>${cert.curso}</td>
+                                <td>${cert.folio}</td>
+                                <td>${cert.fecha}</td>
+                                <td>${cert.idCurso}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="firma">
+                    <img src="${urls.firma}" alt="Firma Director" id="imgFirma">
+                    <p>MTRO. GUSTAVO GIL CAAMAL</p>
+                    <p>DIRECTOR GENERAL</p>
+                </div>
+
+                <script>
+                    // Esperar a que todas las imágenes estén cargadas
+                    Promise.all([
+                        new Promise(resolve => {
+                            const img1 = document.getElementById('imgLogo');
+                            img1.onload = img1.onerror = resolve;
+                            if (img1.complete) resolve();
+                        }),
+                        new Promise(resolve => {
+                            const img2 = document.getElementById('imgEscudo');
+                            img2.onload = img2.onerror = resolve;
+                            if (img2.complete) resolve();
+                        }),
+                        new Promise(resolve => {
+                            const img3 = document.getElementById('imgFirma');
+                            img3.onload = img3.onerror = resolve;
+                            if (img3.complete) resolve();
+                        })
+                    ]).then(() => {
+                        setTimeout(() => {
+                            window.print();
+                            window.close();
+                        }, 500);
+                    });
+                <\/script>
+            </body>
+            </html>
+        `);
+        ventanaImpresion.document.close();
+    });
+});
+</script>
+
+<style>
+.ct-box {
+    background: #f4f6f9;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: auto;
+    box-shadow: 0 0 12px rgba(0,0,0,0.05);
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+.ct-title {
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.ct-form-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+#curpInput {
+    padding: 8px 12px;
+    width: 300px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+#consultarBtn, #imprimirBtn {
+    padding: 8px 16px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+#consultarBtn:hover, #imprimirBtn:hover {
+    background-color: #0056b3;
+}
+.ct-user-info p {
+    margin: 4px 0;
+}
+.ct-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+.ct-table th, .ct-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+.ct-table thead {
+    background-color: #007bff;
+    color: white;
+}
+.ct-error {
+    color: #d9534f;
+    background: #f8d7da;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    margin-top: 15px;
+}
+</style>

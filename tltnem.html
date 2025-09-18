@@ -1,0 +1,132 @@
+<!-- ========== Temario con Acordeón Exclusivo (profesional, tipografía unificada) ========== -->
+<section role="region" aria-label="Temario del curso"
+  style="--brand:#1d4ed8; --brand2:#0ea5e9; --ink:#0f172a; --muted:#475569; --ring:#e5e7eb; --bg:#ffffff; --w-base:500; --w-head:700; --w-btn:600; font-family: system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif; color:var(--ink); max-width:1100px; margin:24px auto; padding:0 16px;">
+
+  <!-- Encabezado -->
+  <header style="background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; border-radius:16px; padding:22px 20px; box-shadow:0 8px 24px rgba(2,6,23,.18);">
+    <h1 style="margin:0 0 8px; font-size:clamp(1.05rem,2.6vw,1.55rem); line-height:1.25; font-weight:var(--w-head); letter-spacing:.2px;">
+      LIBROS DE TEXTO EN EL MARCO DE LA NUEVA ESCUELA MEXICANA. CARACTERÍSTICAS Y METODOLOGÍA
+    </h1>
+    <p style="margin:0; opacity:.95; font-weight:var(--w-base);">Horas: 40 horas</p>
+  </header>
+
+  <!-- Estilos -->
+  <style>
+    .acc-card{border:1px solid var(--ring); border-radius:14px; background:#fff; box-shadow:0 6px 18px rgba(2,6,23,.06); overflow:hidden; margin:14px 0 16px}
+    .acc-btn{width:100%; text-align:left; background:#fff; padding:16px 16px; display:flex; align-items:center; gap:12px; border:0; cursor:pointer; font-weight:var(--w-btn); font-size:1rem; color:var(--ink); letter-spacing:.1px}
+    .acc-btn:hover{background:#f8fafc}
+    .badge{display:inline-flex; width:30px; height:30px; align-items:center; justify-content:center; border-radius:10px; background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; font-weight:var(--w-head)}
+    .acc-arrow{margin-left:auto; transition:transform .25s ease; opacity:.85}
+    .acc-btn[aria-expanded="true"] .acc-arrow{transform:rotate(90deg)}
+    .acc-content{max-height:0; overflow:hidden; transition:max-height .35s ease, opacity .25s ease; opacity:.0; background:#fcfcfd; border-top:1px dashed var(--ring)}
+    .acc-inner{padding:18px 20px; font-weight:var(--w-base)}
+    .block-title{margin:0 0 8px; font-weight:var(--w-head); color:#0f172a}
+    .plain{list-style:none; padding-left:0; margin:.35rem 0 .9rem 0}
+    .plain li{margin:.35rem 0}
+    .indent{margin-left:1.2rem}
+    .res a{color:#1d4ed8; text-decoration:none}
+    .res a:hover{text-decoration:underline}
+    .kicker{display:inline-block; font-size:.82rem; color:var(--muted); margin:0 0 6px}
+  </style>
+
+  <!-- Script acordeón exclusivo (una semana abierta a la vez) -->
+  <script>
+    (function(){
+      function closeAll(except){
+        document.querySelectorAll('[data-acc-content]').forEach(function(p){
+          if(p!==except){
+            p.style.maxHeight='0px';
+            p.style.opacity='.0';
+            const b=p.previousElementSibling;
+            if(b?.hasAttribute('aria-expanded')) b.setAttribute('aria-expanded','false');
+          }
+        });
+      }
+      document.addEventListener('click', function(e){
+        const btn=e.target.closest('[data-accordion]'); if(!btn) return;
+        const panel=btn.nextElementSibling; const open=btn.getAttribute('aria-expanded')==='true';
+        if(!open){ btn.setAttribute('aria-expanded','true'); panel.style.maxHeight=panel.scrollHeight+'px'; panel.style.opacity='1'; closeAll(panel); }
+        else{ btn.setAttribute('aria-expanded','false'); panel.style.maxHeight='0px'; panel.style.opacity='.0'; }
+      });
+      window.addEventListener('load', function(){
+        const first=document.querySelector('[data-accordion]'); if(!first) return;
+        const p=first.nextElementSibling; first.setAttribute('aria-expanded','true'); p.style.maxHeight=p.scrollHeight+'px'; p.style.opacity='1'; closeAll(p);
+      });
+      window.addEventListener('resize', function(){
+        document.querySelectorAll('[data-acc-content]').forEach(function(p){
+          if(p.previousElementSibling?.getAttribute('aria-expanded')==='true'){ p.style.maxHeight=p.scrollHeight+'px'; }
+        });
+      });
+    })();
+  </script>
+
+  <!-- ===================== Semana 1 ===================== -->
+  <article class="acc-card">
+    <button class="acc-btn" data-accordion aria-expanded="false" aria-controls="sem1">
+      <span class="badge" aria-hidden="true">1</span>
+      <span>Semana 1</span>
+      <span class="acc-arrow" aria-hidden="true">▸</span>
+    </button>
+    <div id="sem1" class="acc-content" data-acc-content>
+      <div class="acc-inner">
+        <p class="block-title">Módulo 1. Una nueva familia de libros de texto gratuitos. LTG Características y metodología. </p>
+
+        <p class="block-title" style="margin-top:14px">Objetivos:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Identificar las características principales de los nuevos LTG.</li>
+          <li>•&nbsp;Analizar su estructura pedagógica y metodológica.</li>
+          <li>•&nbsp;Reconocer su papel en la implementación del Plan de Estudio 2022.</li>
+        </ul>
+
+        <p class="block-title">Temas:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Principios pedagógicos de la Nueva Escuela Mexicana en los LTG.</li>
+          <li>•&nbsp;Organización de los LTG. </li>
+        </ul>
+
+        <p class="block-title">Actividades:</p>
+        <ol class="plain indent res">
+          <li>1.&nbsp;Video sugerido: Conferencia SEP: Presentación de los nuevos LTG (canal oficial de la SEP en YouTube). <a href="https://youtu.be/f-oLGIMQaCw?si=_8P86CY-N4SxX67s" target="_blank" rel="noopener">https://youtu.be/f-oLGIMQaCw?si=_8P86CY-N4SxX67s</a></li>
+          <li>2.&nbsp;Identifica las características principales de los Libros de Texto Gratuitos (LTG) expuestas en la presentación “La Nueva Escuela Mexicana y los Libros de Texto Gratuitos” <a href="https://educacionbasica.sep.gob.mx/wp-content/uploads/2023/08/La-Nueva-Escuela-Mexicana-y-los-Libros-de-Texto-Gratuitos.pdf" target="_blank" rel="noopener">https://educacionbasica.sep.gob.mx/wp-content/uploads/2023/08/La-Nueva-Escuela-Mexicana-y-los-Libros-de-Texto-Gratuitos.pdf</a>. Posteriormente, plasma dicha información en un organizador gráfico en la aplicación de tu preferencia y guarda el archivo en formato PDF para su entrega. </li>
+        </ol>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===================== Semana 2 ===================== -->
+  <article class="acc-card">
+    <button class="acc-btn" data-accordion aria-expanded="false" aria-controls="sem2">
+      <span class="badge" aria-hidden="true">2</span>
+      <span>Semana 2</span>
+      <span class="acc-arrow" aria-hidden="true">▸</span>
+    </button>
+    <div id="sem2" class="acc-content" data-acc-content>
+      <div class="acc-inner">
+        <p class="block-title">Módulo 2. Autonomía profesional. Del programa analítico a la selección de los proyectos. </p>
+
+        <p class="block-title" style="margin-top:14px">Objetivos:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Comprender la importancia de la autonomía profesional en la práctica docente.</li>
+          <li>•&nbsp;Relacionar el programa analítico con los LTG y su aplicación en proyectos educativos.</li>
+        </ul>
+
+        <p class="block-title">Temas:</p>
+        <ul class="plain indent">
+          <li>•&nbsp;Autonomía profesional docente en la NEM.</li>
+          <li>•&nbsp;Selección y contextualización de proyectos a partir de los LTG.</li>
+        </ul>
+
+        <p class="block-title">Actividades:</p>
+        <ol class="plain indent res">
+          <li>1.&nbsp;Realizar la lectura “Posibilidades de uso de los libros de texto gratuitos”.
+            <a href="https://educacionbasica.sep.gob.mx/wp-content/uploads/2023/09/Posibilidades_de_uso_de_los_LTG_Fase_3.pdf" target="_blank" rel="noopener">https://educacionbasica.sep.gob.mx/wp-content/uploads/2023/09/Posibilidades_de_uso_de_los_LTG_Fase_3.pdf</a>
+          </li>
+          <li>2.&nbsp;Video sugerido: "Retos de la docencia ante el marco curricular 2022" del canal oficial de la SEP. <a href="https://www.youtube.com/live/JAlVWO33Pyc?si=My5601r2z9rO1uKE" target="_blank" rel="noopener">https://www.youtube.com/live/JAlVWO33Pyc?si=My5601r2z9rO1uKE</a> </li>
+          <li>3.&nbsp;Reflexión escrita de una cuartilla sobre la autonomía profesional y el uso de los LTG. Guarda el archivo en formato PDF para su entrega.</li>
+        </ol>
+      </div>
+    </div>
+  </article>
+
+</section>
+<!-- ========== Fin del Temario ========== -->

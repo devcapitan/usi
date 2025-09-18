@@ -1,0 +1,196 @@
+<!-- ===================== CONVOCATORIAS ===================== -->
+<style>
+  .convoc * { box-sizing: border-box; }
+  .convoc { --c-card:#ffffff; --c-text:#1f2937; --c-sub:#6b7280;
+            --c-accent:#2563eb; --c-accent-2:#0ea5e9; --c-line:#e5e7eb;
+            --radius:16px; --shadow:0 8px 20px rgba(2,6,23,.08);
+            font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif; color:var(--c-text);}
+  .convoc .wrap{max-width:1100px;margin:0 auto;padding:28px 18px;}
+  .convoc-header{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:18px}
+  .convoc-title{font-size:clamp(20px,2.6vw,28px);font-weight:800;letter-spacing:.2px;color:#111827}
+  .convoc-sub{color:var(--c-sub);font-size:14px}
+  .convoc-controls{display:flex;flex-wrap:wrap;gap:10px;margin-left:auto}
+  .convoc input.convoc-search,.convoc select.convoc-filter{
+    border:1px solid var(--c-line); border-radius:10px; height:42px; padding:0 12px;
+    outline:0; background:#fff; color:#111827;
+  }
+  .convoc .convoc-search{min-width:240px; flex:1}
+  .convoc .convoc-filter{min-width:160px}
+
+  .convoc-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px; margin-top:14px}
+  .convoc-card{grid-column:span 12;background:var(--c-card);border:1px solid var(--c-line);
+               border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .2s ease}
+  .convoc-card:hover{transform:translateY(-2px)}
+  .convoc-body{padding:20px}
+  .convoc-top{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px}
+  .convoc-icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;
+               background:linear-gradient(135deg,var(--c-accent),var(--c-accent-2));}
+  .convoc-icon svg{width:26px;height:26px;color:#fff}
+  .convoc-info{flex:1}
+  .convoc-h{font-weight:800;font-size:20px;margin:0}
+  .convoc-meta{margin-top:6px;color:var(--c-sub);font-size:13px}
+  .convoc-actions{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px}
+  .btn{border:0;border-radius:10px;height:40px;padding:0 14px;font-weight:700;
+       display:inline-flex;align-items:center;gap:6px;cursor:pointer;text-decoration:none}
+  .btn-primary{background:linear-gradient(135deg,var(--c-accent),var(--c-accent-2));color:#fff}
+  .btn-ghost{background:#fff;border:1px solid var(--c-line);color:#111827}
+  .convoc-foot{border-top:1px dashed var(--c-line);padding:10px 18px;color:var(--c-sub);font-size:12px}
+
+  @media (min-width:680px){ .convoc-card{grid-column:span 6} }
+  @media (min-width:1024px){ .convoc-card{grid-column:span 4} }
+
+  .convoc-state{margin-left:auto;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700}
+  .state-open{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}
+
+  /* Modal PDF */
+  .convoc-modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;z-index:9998}
+  .convoc-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;z-index:9999}
+  .convoc-modal[open], .convoc-modal-backdrop[open]{display:flex}
+  .convoc-modal-card{width:min(100%,900px);background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(2,6,23,.25);overflow:hidden;display:flex;flex-direction:column}
+  .convoc-modal-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #e5e7eb}
+  .convoc-modal-title{font-weight:800}
+  .convoc-modal-close{border:0;background:transparent;cursor:pointer;font-size:18px;line-height:1;padding:8px}
+  .convoc-modal-body{padding:0;height:min(80vh,900px)}
+  .convoc-pdf{width:100%;height:100%;border:0}
+</style>
+
+<!-- Iconos SVG -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>
+  </symbol>
+  <symbol id="i-link" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M10 13a5 5 0 0 1 0-7l1.5-1.5a5 5 0 0 1 7 7L17 12"/><path d="M14 11a5 5 0 0 1 0 7L12.5 19.5a5 5 0 0 1-7-7L7 10"/>
+  </symbol>
+</svg>
+
+<div class="convoc">
+  <div class="wrap">
+    <div class="convoc-header">
+      <div>
+        <div class="convoc-title">Convocatorias vigentes</div>
+        <div class="convoc-sub">Consulta las convocatorias activas y próximas.</div>
+      </div>
+      <div class="convoc-controls">
+        <input class="convoc-search" type="search" placeholder="Buscar…" aria-label="Buscar convocatorias">
+        <select class="convoc-filter" aria-label="Filtrar por estado">
+          <option value="">Todas</option>
+          <option value="abierta">Abiertas</option>
+          <option value="proxima">Próximas</option>
+          <option value="cerrada">Cerradas</option>
+        </select>
+      </div>
+    </div>
+
+    <section class="convoc-grid" id="convocGrid">
+      <!-- ===== ÚNICA CARD ===== -->
+      <article class="convoc-card" data-state="abierta" data-tags="primera jornada 2025">
+        <div class="convoc-body">
+          <div class="convoc-top">
+            <div class="convoc-icon"><svg><use href="#i-doc"/></svg></div>
+            <div class="convoc-info">
+              <h3 class="convoc-h">Convocatoria Cursos 2025</h3>
+              <div class="convoc-meta">Inscripciones: del 6 al 14 de septiembre</div>
+            </div>
+            <span class="convoc-state state-open">ABIERTA</span>
+          </div>
+
+          <p class="convoc-desc">
+            Consulta aquí las bases de la Convocatoria 2025 y descarga el documento oficial.
+          </p>
+
+          <div class="convoc-actions">
+            <!-- Botón visor PDF (actualizado) -->
+            <button class="btn btn-ghost" type="button"
+                    data-modal-open="pdf"
+                    data-pdf-id="15odO_BhMO8M_8OmFFkKJXYEg8fmnJTF9"
+                    data-title="Convocatoria Primera Jornada 2025 – Bases (PDF)">
+              <svg width="18" height="18"><use href="#i-link"/></svg> Ver convocatoria (PDF)
+            </button>
+            <!-- Descarga directa (actualizada) -->
+            <a class="btn btn-primary"
+               href="https://drive.google.com/file/d/15odO_BhMO8M_8OmFFkKJXYEg8fmnJTF9/view"
+               target="_blank" rel="noopener">
+              <svg width="18" height="18"><use href="#i-link"/></svg> Descargar PDF
+            </a>
+          </div>
+        </div>
+        <div class="convoc-foot">
+          <span>ID: PRIM-2025</span>
+          <span>Última actualización: 26 Ago 2025</span>
+        </div>
+      </article>
+    </section>
+  </div>
+</div>
+
+<!-- Modal visor PDF -->
+<div class="convoc-modal-backdrop" id="pdfBackdrop"></div>
+<div class="convoc-modal" id="pdfModal" aria-hidden="true" role="dialog" aria-labelledby="pdfTitle">
+  <div class="convoc-modal-card">
+    <div class="convoc-modal-head">
+      <div class="convoc-modal-title" id="pdfTitle">Convocatoria – Bases (PDF)</div>
+      <button class="convoc-modal-close" type="button" aria-label="Cerrar" data-modal-close>&times;</button>
+    </div>
+    <div class="convoc-modal-body">
+      <iframe id="pdfFrame" class="convoc-pdf" src="about:blank" allow="autoplay"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---- Búsqueda + Filtro
+  (function(){
+    const grid = document.getElementById('convocGrid');
+    const search = document.querySelector('.convoc-search');
+    const filter = document.querySelector('.convoc-filter');
+    function normaliza(t){ return (t||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,''); }
+    function aplica(){
+      const q = normaliza(search.value);
+      const f = filter.value;
+      grid.querySelectorAll('.convoc-card').forEach(card=>{
+        const texto = normaliza(card.innerText);
+        const state = (card.getAttribute('data-state')||'').toLowerCase();
+        const pasaTexto = q==='' || texto.includes(q);
+        const pasaFiltro = f==='' || state===f;
+        card.hidden = !(pasaTexto && pasaFiltro);
+      });
+    }
+    search?.addEventListener('input',aplica);
+    filter?.addEventListener('change',aplica);
+  })();
+
+  // ---- Visor PDF
+  (function(){
+    const modal   = document.getElementById('pdfModal');
+    const back    = document.getElementById('pdfBackdrop');
+    const frame   = document.getElementById('pdfFrame');
+    const titleEl = document.getElementById('pdfTitle');
+    const openers = document.querySelectorAll('[data-modal-open="pdf"]');
+    const closers = document.querySelectorAll('[data-modal-close]');
+
+    function buildDrivePreview(id){ return "https://drive.google.com/file/d/"+ id +"/preview"; }
+
+    function openWith(id, title){
+      frame.src = buildDrivePreview(id);
+      titleEl.textContent = title || "Convocatoria – Bases (PDF)";
+      modal.setAttribute('open',''); back.setAttribute('open',''); modal.setAttribute('aria-hidden','false');
+    }
+    function close(){
+      modal.removeAttribute('open'); back.removeAttribute('open');
+      modal.setAttribute('aria-hidden','true'); frame.src = "about:blank";
+    }
+
+    openers.forEach(b=>{
+      b.addEventListener('click',()=>{
+        const id = b.getAttribute('data-pdf-id');
+        const title = b.getAttribute('data-title');
+        openWith(id,title);
+      });
+    });
+    closers.forEach(b=>b.addEventListener('click',close));
+    back.addEventListener('click',close);
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+  })();
+</script>
+<!-- ===================== /CONVOCATORIAS ===================== -->

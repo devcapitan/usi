@@ -1,0 +1,92 @@
+<!-- ====== Catálogo PDF (modal + abrir en pestaña) ====== -->
+<section class="pdf-catalogo" id="catalogo-pdf" aria-label="Catálogo en  USICAMM 2025-2026">
+  <style>
+    .pdf-catalogo{--brand:#0ea5e9;--ink:#0f172a;--muted:#475569;--bg:#fff;--shadow:0 12px 30px rgba(2,8,23,.12),0 6px 12px rgba(2,8,23,.06);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    .pdf-catalogo .wrap{max-width:900px;margin:0 auto;padding:20px}
+    .pdf-catalogo .title{font-size:26px;font-weight:800;color:var(--ink);margin:0 0 6px}
+    .pdf-catalogo .subtitle{color:var(--muted);font-size:14px;margin:0 0 16px}
+    .pdf-catalogo .card{background:#fff;border:1px solid rgba(2,8,23,.06);border-radius:16px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:center;padding:16px;flex-wrap:wrap}
+    .pdf-catalogo .thumb{width:64px;height:84px;flex:0 0 auto;border-radius:10px;background:#f8fafc;display:grid;place-items:center;border:1px solid rgba(2,8,23,.05)}
+    .pdf-catalogo .info{flex:1}
+    .pdf-catalogo .name{font-weight:700;color:var(--ink);font-size:16px;margin-bottom:4px}
+    .pdf-catalogo .meta{color:var(--muted);font-size:12px}
+    .pdf-catalogo .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .pdf-catalogo .btn{background:var(--brand);color:#fff;font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;text-decoration:none;display:inline-block}
+    .pdf-catalogo .btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(2,8,23,.10)}
+    /* Modal */
+    .pdf-catalogo .overlay[hidden]{display:none!important}
+    .pdf-catalogo .overlay{position:fixed;inset:0;z-index:9999;background:rgba(2,8,23,.6);display:grid;place-items:center;padding:20px}
+    .pdf-catalogo .viewer{width:min(1000px,96vw);height:min(90vh,800px);background:var(--bg);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr}
+    .pdf-catalogo .v-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#f8fafc;border-bottom:1px solid rgba(2,8,23,.1)}
+    .pdf-catalogo .v-title{font-weight:700;color:var(--ink);font-size:14px}
+    .pdf-catalogo .v-close{background:var(--brand);color:#fff;border:none;padding:6px 12px;border-radius:8px;cursor:pointer}
+    .pdf-catalogo .v-iframe{width:100%;height:100%;border:0;background:#fff}
+  </style>
+
+  <div class="wrap">
+    <h2 class="title">Catálogo en  USICAMM 2025-2026</h2>
+    <p class="subtitle">Visualiza el catálogo o ábrelo en una pestaña nueva.</p>
+
+    <article class="card" 
+      data-pdf="https://drive.google.com/file/d/11YL8lguM4WR1MICwJUkbZuUG8hfSafHU/preview" 
+      data-title="Catálogo General 2025">
+      <div class="thumb" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z" stroke="#0ea5e9" stroke-width="1.5"/>
+          <path d="M14 2v6h6" stroke="#0ea5e9" stroke-width="1.5"/>
+          <text x="7" y="17" font-size="6" font-weight="700" fill="#0ea5e9">PDF</text>
+        </svg>
+      </div>
+      <div class="info">
+        <div class="name">Catálogo General 2025</div>
+        <div class="meta">Vista por Google Drive</div>
+      </div>
+      <div class="actions">
+        <button class="btn" data-open>Ver catálogo</button>
+        <a class="btn" href="https://drive.google.com/file/d/11YL8lguM4WR1MICwJUkbZuUG8hfSafHU/preview" target="_blank" rel="noopener">Abrir en pestaña</a>
+      </div>
+    </article>
+  </div>
+
+  <!-- Modal -->
+  <div class="overlay" hidden>
+    <div class="viewer">
+      <div class="v-head">
+        <div id="v-title" class="v-title">Visualizando PDF…</div>
+        <button class="v-close" id="v-close">Cerrar ✕</button>
+      </div>
+      <iframe class="v-iframe" id="v-frame" loading="lazy" allow="fullscreen"></iframe>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const root = document.currentScript.closest('.pdf-catalogo');
+      const overlay = root.querySelector('.overlay');
+      const frame = root.querySelector('#v-frame');
+      const vTitle = root.querySelector('#v-title');
+      const vClose = root.querySelector('#v-close');
+
+      function openViewer(url,title){
+        vTitle.textContent = title || 'Catálogo';
+        frame.src = url;
+        overlay.hidden = false;
+      }
+      function closeViewer(){
+        overlay.hidden = true;
+        frame.src = 'about:blank';
+      }
+
+      root.addEventListener('click', (e)=>{
+        const card = e.target.closest('.card');
+        if(!card) return;
+        if(e.target.matches('[data-open]')){
+          e.preventDefault();
+          openViewer(card.getAttribute('data-pdf'), card.getAttribute('data-title'));
+        }
+      });
+      vClose.addEventListener('click', closeViewer);
+      overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeViewer(); });
+    })();
+  </script>
+</section>

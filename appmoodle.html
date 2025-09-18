@@ -1,0 +1,254 @@
+<!-- === SLIDER COMPACTO + ZOOM · App Moodle por QR (Android & iOS) === -->
+<section id="slider-moodle-qr"
+  aria-label="Manual en carrusel: App Moodle por QR"
+  style="--w:680px; --h:260px; --h-sm:210px; --ink:#0f172a; --muted:#64748b; --ring:#e5e7eb; --brand:#0ea5e9; --brand-dark:#0369a1; font-family:'Segoe UI',Roboto,Arial,sans-serif; color:var(--ink); margin:16px auto; max-width:var(--w); position:relative;">
+
+  <!-- Encabezado -->
+  <header style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 4px 10px;">
+    <h2 style="font-size:1.05rem; font-weight:800; margin:0;">App Moodle · Acceso por QR</h2>
+    <a href="https://cursos.crenjrg.edu.mx/login/index.php" target="_blank" rel="noopener"
+       style="font-size:0.8rem; padding:6px 10px; border-radius:999px; background:var(--brand); color:#fff; text-decoration:none; border:1px solid var(--brand-dark);">
+       Ir a la plataforma
+    </a>
+  </header>
+
+  <!-- Viewport del carrusel -->
+  <div class="viewport"
+       style="position:relative; border:1px solid var(--ring); border-radius:14px; overflow:hidden; box-shadow:0 6px 16px rgba(2,6,23,.06); background:#fff;">
+    <!-- Pista (scroll-snap) -->
+    <div class="track"
+         style="display:flex; gap:12px; overflow:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; padding:0 12px 12px; scrollbar-width:none;"
+         onscroll="this.parentElement.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active', Math.round(this.scrollLeft/this.clientWidth)===i))">
+
+      <style>
+        /* Estilos internos del slider */
+        #slider-moodle-qr .track::-webkit-scrollbar{display:none;}
+        #slider-moodle-qr .card{scroll-snap-align:center; flex:0 0 100%; max-width:100%;}
+        #slider-moodle-qr figure{margin:0; border-radius:12px; overflow:hidden; border:1px solid #e5e7eb; position:relative; background:#f8fafc;}
+        #slider-moodle-qr img{width:100%; height:var(--h); object-fit:cover; display:block; background:#fff;}
+        #slider-moodle-qr figcaption{padding:10px 12px; font-size:.92rem; line-height:1.55; background:#fff;}
+        #slider-moodle-qr .badge{position:absolute; top:10px; left:10px; background:rgba(14,165,233,.95); color:#fff; padding:4px 8px; border-radius:999px; font-weight:700; font-size:.8rem;}
+        /* Botón de zoom (lupa) */
+        #slider-moodle-qr .zoom-btn{
+          position:absolute; top:10px; right:10px; z-index:2;
+          display:inline-flex; align-items:center; justify-content:center;
+          width:36px; height:36px; border-radius:10px;
+          background:rgba(255,255,255,.92); border:1px solid #e2e8f0;
+          box-shadow:0 3px 10px rgba(2,6,23,.08); cursor:pointer;
+        }
+        #slider-moodle-qr .zoom-btn:hover{background:#fff;}
+        #slider-moodle-qr .zoom-btn svg{width:20px; height:20px; fill:none; stroke:#0f172a; stroke-width:2;}
+        /* Puntos */
+        #slider-moodle-qr .nav{display:flex; gap:6px; justify-content:center; padding:10px 0 0;}
+        #slider-moodle-qr .dot{width:10px; height:10px; border-radius:50%; background:#cbd5e1; border:0; cursor:pointer;}
+        #slider-moodle-qr .dot.active{background:#0ea5e9;}
+        /* Flechas visibles */
+        #slider-moodle-qr .arrow{position:absolute; right:8px; bottom:8px; display:flex; gap:8px; z-index:3;}
+        #slider-moodle-qr .btn{
+          padding:10px 12px; border-radius:10px; border:1px solid var(--brand-dark);
+          background:var(--brand); color:#fff; box-shadow:0 4px 10px rgba(2,6,23,.15);
+          cursor:pointer; font-size:.9rem; font-weight:700;
+        }
+        #slider-moodle-qr .btn:hover{background:var(--brand-dark);}
+        @media (max-width:640px){
+          #slider-moodle-qr img{height:var(--h-sm);}
+          #slider-moodle-qr h2{font-size:1rem;}
+        }
+
+        /* Lightbox */
+        #slider-moodle-qr .lightbox{
+          position:fixed; inset:0; background:rgba(0,0,0,.7);
+          display:none; align-items:center; justify-content:center; z-index:9999;
+          padding:20px;
+        }
+        #slider-moodle-qr .lightbox.open{display:flex;}
+        #slider-moodle-qr .lightbox-inner{
+          max-width:min(1000px, 92vw); max-height:92vh; background:#0b1220;
+          border-radius:14px; overflow:hidden; border:1px solid #1f2937; position:relative;
+        }
+        #slider-moodle-qr .lightbox img{
+          display:block; max-width:100%; max-height:80vh; width:auto; height:auto; margin:auto; background:#000;
+        }
+        #slider-moodle-qr .lightbox .caption{color:#e5e7eb; padding:10px 14px; font-size:.9rem;}
+        #slider-moodle-qr .lightbox .close{
+          position:absolute; top:10px; right:10px; background:#111827; color:#fff;
+          border:1px solid #374151; border-radius:10px; padding:8px 10px; cursor:pointer;
+        }
+      </style>
+
+      <!-- Util: componente botón lupa -->
+      <template id="tpl-zoom-icon">
+        <button class="zoom-btn" type="button" aria-label="Ampliar imagen (zoom)">
+          <!-- Lupa en SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </template>
+
+      <!-- Slides -->
+      <article class="card" aria-label="Paso 1">
+        <figure>
+          <span class="badge">1</span>
+          <!-- Zoom -->
+          <button class="zoom-btn" type="button" aria-label="Ampliar imagen (zoom)" data-zoom-src="https://devcapitan.github.io/manual/01.jpg" data-caption="1) Descarga la app. Instala Moodle desde Play Store o App Store.">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <img loading="lazy" src="https://devcapitan.github.io/manual/01.jpg" alt="Descargar la app Moodle en Android o iOS">
+          <figcaption><strong>Descarga la app.</strong> Instala <em>Moodle</em> desde Play Store (Android) o App Store (iOS).</figcaption>
+        </figure>
+      </article>
+
+      <article class="card" aria-label="Paso 2">
+        <figure>
+          <span class="badge">2</span>
+          <button class="zoom-btn" type="button" aria-label="Ampliar imagen (zoom)" data-zoom-src="https://devcapitan.github.io/manual/02.jpg" data-caption="2) Verifica la instalación. Confirma que la app se haya instalado correctamente.">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <img loading="lazy" src="https://devcapitan.github.io/manual/02.jpg" alt="Verificación de instalación">
+          <figcaption><strong>Verifica la instalación.</strong> Confirma que la app se haya instalado correctamente.</figcaption>
+        </figure>
+      </article>
+
+      <article class="card" aria-label="Paso 3">
+        <figure>
+          <span class="badge">3</span>
+          <button class="zoom-btn" type="button" aria-label="Ampliar imagen (zoom)" data-zoom-src="https://devcapitan.github.io/manual/03.png" data-caption="3) Inicia sesión en web. Ingresa a cursos.crenjrg.edu.mx/login e inicia sesión.">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <img loading="lazy" src="https://devcapitan.github.io/manual/03.png" alt="Iniciar sesión en la plataforma web">
+          <figcaption><strong>Inicia sesión en web.</strong> Entra a <a href="https://cursos.crenjrg.edu.mx/login/index.php" target="_blank" rel="noopener">cursos.crenjrg.edu.mx/login</a> con tu usuario y contraseña.</figcaption>
+        </figure>
+      </article>
+
+      <article class="card" aria-label="Paso 4">
+        <figure>
+          <span class="badge">4</span>
+          <button class="zoom-btn" type="button" aria-label="Ampliar imagen (zoom)" data-zoom-src="https://devcapitan.github.io/manual/04.png" data-caption="4) Abre tu perfil. Selecciona Perfil / Profile.">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <img loading="lazy" src="https://devcapitan.github.io/manual/04.png" alt="Abrir sección Perfil">
+          <figcaption><strong>Abre tu perfil.</strong> Dentro de la plataforma, selecciona <strong>Perfil / Profile</strong>.</figcaption>
+        </figure>
+      </article>
+
+      <article class="card" aria-label="Paso 5">
+        <figure>
+          <span class="badge">5</span>
+          <button class="zoom-btn" type="button" aria-label="Ampliar imagen (zoom)" data-zoom-src="https://devcapitan.github.io/manual/05.png" data-caption="5) Mobile app (QR). Localiza el módulo con el código QR.">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <img loading="lazy" src="https://devcapitan.github.io/manual/05.png" alt="Módulo Mobile app con código QR">
+          <figcaption><strong>Mobile app (QR).</strong> En tu perfil, localiza el módulo <strong>Mobile app</strong> con el <strong>código QR</strong>.</figcaption>
+        </figure>
+      </article>
+
+      <article class="card" aria-label="Paso 6">
+        <figure>
+          <span class="badge">6</span>
+          <button class="zoom-btn" type="button" aria-label="Ampliar imagen (zoom)" data-zoom-src="https://devcapitan.github.io/manual/06.jpg" data-caption="6) Abre la app móvil. Regresa a tu dispositivo y abre Moodle.">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <img loading="lazy" src="https://devcapitan.github.io/manual/06.jpg" alt="Abrir la app Moodle en el móvil">
+          <figcaption><strong>Abre la app móvil.</strong> Regresa a tu dispositivo y abre la app <strong>Moodle</strong>.</figcaption>
+        </figure>
+      </article>
+
+      <article class="card" aria-label="Paso 7">
+        <figure>
+          <span class="badge">7</span>
+          <button class="zoom-btn" type="button" aria-label="Ampliar imagen (zoom)" data-zoom-src="https://devcapitan.github.io/manual/07.jpg" data-caption="7) Conexión. Escribe la URL cursos.crenjrg.edu.mx o toca Escanear código QR.">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <img loading="lazy" src="https://devcapitan.github.io/manual/07.jpg" alt="Conectar por URL o escanear QR">
+          <figcaption><strong>Conexión.</strong> Escribe <a href="https://cursos.crenjrg.edu.mx" target="_blank" rel="noopener">https://cursos.crenjrg.edu.mx</a> o toca <strong>Escanear código QR</strong>.</figcaption>
+        </figure>
+      </article>
+
+      <article class="card" aria-label="Paso 8">
+        <figure>
+          <span class="badge">8</span>
+          <button class="zoom-btn" type="button" aria-label="Ampliar imagen (zoom)" data-zoom-src="https://devcapitan.github.io/manual/08.jpg" data-caption="8) Permiso y escaneo. Concede permiso a la cámara y escanea el QR de tu perfil.">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <img loading="lazy" src="https://devcapitan.github.io/manual/08.jpg" alt="Permiso de cámara y escaneo del QR">
+          <figcaption><strong>Permiso y escaneo.</strong> Toca <strong>Siguiente</strong>, concede permiso a la cámara y escanea el <strong>QR</strong> de tu perfil.</figcaption>
+        </figure>
+      </article>
+
+      <article class="card" aria-label="Paso 9">
+        <figure>
+          <span class="badge">9</span>
+          <button class="zoom-btn" type="button" aria-label="Ampliar imagen (zoom)" data-zoom-src="https://devcapitan.github.io/manual/09.jpg" data-caption="9) Accede. Ingresa tu usuario y contraseña y toca Acceder.">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <img loading="lazy" src="https://devcapitan.github.io/manual/09.jpg" alt="Inicio de sesión dentro de la app">
+          <figcaption><strong>Accede.</strong> Ingresa tu <strong>usuario</strong> y <strong>contraseña</strong> y toca <strong>Acceder</strong>.</figcaption>
+        </figure>
+      </article>
+    </div>
+
+    <!-- Flechas VISIBLES -->
+    <div class="arrow">
+      <button class="btn" type="button" aria-label="Anterior"
+        onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollBy({left:-t.clientWidth,behavior:'smooth'});">◀</button>
+      <button class="btn" type="button" aria-label="Siguiente"
+        onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollBy({left:t.clientWidth,behavior:'smooth'});">▶</button>
+    </div>
+  </div>
+
+  <!-- Puntos -->
+  <nav class="nav" aria-label="Paginación de slides">
+    <button class="dot active" onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollTo({left:0,behavior:'smooth'});" aria-label="Ir al paso 1"></button>
+    <button class="dot" onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollTo({left:t.clientWidth*1,behavior:'smooth'});" aria-label="Ir al paso 2"></button>
+    <button class="dot" onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollTo({left:t.clientWidth*2,behavior:'smooth'});" aria-label="Ir al paso 3"></button>
+    <button class="dot" onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollTo({left:t.clientWidth*3,behavior:'smooth'});" aria-label="Ir al paso 4"></button>
+    <button class="dot" onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollTo({left:t.clientWidth*4,behavior:'smooth'});" aria-label="Ir al paso 5"></button>
+    <button class="dot" onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollTo({left:t.clientWidth*5,behavior:'smooth'});" aria-label="Ir al paso 6"></button>
+    <button class="dot" onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollTo({left:t.clientWidth*6,behavior:'smooth'});" aria-label="Ir al paso 7"></button>
+    <button class="dot" onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollTo({left:t.clientWidth*7,behavior:'smooth'});" aria-label="Ir al paso 8"></button>
+    <button class="dot" onclick="const t=this.closest('#slider-moodle-qr').querySelector('.track'); t.scrollTo({left:t.clientWidth*8,behavior:'smooth'});" aria-label="Ir al paso 9"></button>
+  </nav>
+
+  <!-- LIGHTBOX (visor de imágenes) -->
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" id="lb-moodle-qr">
+    <div class="lightbox-inner">
+      <button class="close" type="button" aria-label="Cerrar visor" onclick="this.closest('.lightbox').classList.remove('open')">Cerrar ✕</button>
+      <img src="" alt="Imagen ampliada">
+      <div class="caption"></div>
+    </div>
+  </div>
+
+  <!-- JS: Zoom / Lightbox -->
+  <script>
+    (function(){
+      const root = document.getElementById('slider-moodle-qr');
+      const lightbox = root.querySelector('#lb-moodle-qr');
+      const lbImg = lightbox.querySelector('img');
+      const lbCap = lightbox.querySelector('.caption');
+
+      // Abrir lightbox
+      root.querySelectorAll('.zoom-btn').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const src = btn.getAttribute('data-zoom-src') || btn.closest('figure').querySelector('img')?.src;
+          const cap = btn.getAttribute('data-caption') || btn.closest('figure').querySelector('figcaption')?.innerText || '';
+          if(src){
+            lbImg.src = src;
+            lbCap.textContent = cap;
+            lightbox.classList.add('open');
+            // cerrar con ESC
+            const onKey = (e)=>{ if(e.key==='Escape'){ lightbox.classList.remove('open'); document.removeEventListener('keydown', onKey); } };
+            document.addEventListener('keydown', onKey);
+          }
+        });
+      });
+
+      // Cerrar al hacer click fuera de la imagen
+      lightbox.addEventListener('click', (e)=>{
+        const inner = lightbox.querySelector('.lightbox-inner');
+        if(!inner.contains(e.target)){ lightbox.classList.remove('open'); }
+      });
+    })();
+  </script>
+</section>
