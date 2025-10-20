@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../Desktop/CODIGOS LIMESURVEY"
+		},
+		{
+			"name": "usi",
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "usi"
+	}
+}
