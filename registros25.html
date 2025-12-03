@@ -1,117 +1,12 @@
-<style>
-  /* ====== RESPONSIVE USICAMM ====== */
-  /* Tablet horizontal / pantallas medianas */
-  @media (max-width: 991px) {
-    .oferta-panel {
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-  }
-
-  /* Celulares / pantallas pequeñas */
-  @media (max-width: 640px) {
-    .oferta-panel {
-      grid-template-columns: minmax(0, 1fr) !important;
-      gap: 16px !important;
-    }
-
-    /* Ajuste de padding general */
-    .oferta-usicamm-root {
-      padding: 20px 10px !important;
-    }
-
-    /* Tabs en columna para que se vean mejor en móvil */
-    .oferta-usicamm-tabs {
-      flex-direction: column !important;
-      align-items: stretch !important;
-    }
-    .oferta-usicamm-tabs button {
-      width: 100% !important;
-      justify-content: center !important;
-    }
-  }
-</style>
-
-<!-- Bloque profesional de módulos de cursos con tabs Básica / Media Superior -->
-<div role="region" aria-label="Módulos de cursos profesionales"
-     class="oferta-usicamm-root"
-     style="--brand:#2563eb; --brandDark:#1e40af; --ring:#e5e7eb; --muted:#6b7280; --ink:#0f172a;
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans';
-            color:#1f2937; max-width:1200px; margin:0 auto; padding:28px 16px;">
-
-  <!-- Encabezado -->
+<!-- Bloque profesional de módulos de cursos (100% inline styles, apto para Joomla) -->
+<div role="region" aria-label="Módulos de cursos profesionales" style="--brand:#2563eb; --brandDark:#1e40af; --ring:#e5e7eb; --muted:#6b7280; --ink:#0f172a; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans'; color:#1f2937; max-width:1200px; margin:0 auto; padding:28px 16px;">
   <header style="text-align:center; margin-bottom:22px;">
-    <div style="display:inline-block; padding:6px 10px; border:1px solid #d1e0ff; border-radius:999px;
-                background:linear-gradient(180deg, rgba(37,99,235,.08), rgba(37,99,235,.03));
-                font-size:12px; color:#1e40af; font-weight:700; letter-spacing:.3px;">
-      Oferta Académica
-    </div>
-    <h2 style="margin:8px 0 6px; font-size:clamp(24px,2.6vw,34px); font-weight:800; letter-spacing:.2px;">
-      Cursos y Diplomados USICAMM 2026-2027 (Extracurriculares)
-    </h2>
-    <p style="margin:0; color:var(--muted); font-size:clamp(14px,1.6vw,16px);">
-      Consulta cada ficha para ver horas, cuota de recuperación y fechas.
-    </p>
+    <div style="display:inline-block; padding:6px 10px; border:1px solid #d1e0ff; border-radius:999px; background:linear-gradient(180deg, rgba(37,99,235,.08), rgba(37,99,235,.03)); font-size:12px; color:#1e40af; font-weight:700; letter-spacing:.3px;">Oferta Académica</div>
+    <h2 style="margin:8px 0 6px; font-size:clamp(24px,2.6vw,34px); font-weight:800; letter-spacing:.2px;">Cursos USICAMM 2025 (Extracurriculares)</h2>
+    <p style="margin:0; color:var(--muted); font-size:clamp(14px,1.6vw,16px);">Consulta cada ficha para ver horas, cuota de recuperación y fechas.</p>
   </header>
 
-  <!-- Menú horizontal de tabs con fondo -->
-  <div style="display:flex; justify-content:center; margin-bottom:18px;">
-    <div class="oferta-usicamm-tabs"
-         style="background:#f1f5f9; border-radius:999px; padding:4px 6px; border:1px solid #dbeafe;
-                box-shadow:0 8px 18px rgba(15,23,42,.06); display:inline-flex; gap:8px; flex-wrap:wrap;">
-      <!-- Tab Educación básica (activo por defecto) -->
-      <button id="tab-basica" type="button"
-              onclick="(function(){
-                var b=document.getElementById('panel-basica');
-                var m=document.getElementById('panel-media');
-                var tb=document.getElementById('tab-basica');
-                var tm=document.getElementById('tab-media');
-                b.style.display='grid';
-                m.style.display='none';
-                tb.style.background='#1e40af';
-                tb.style.color='#ffffff';
-                tb.style.borderColor='#1e40af';
-                tm.style.background='#e5e7eb';
-                tm.style.color='#111827';
-                tm.style.borderColor='#cbd5f5';
-              })();"
-              style="border-radius:999px; padding:8px 18px; border:1px solid #1e40af;
-                     background:#1e40af; color:#ffffff; font-weight:700; font-size:14px;
-                     cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
-        Educación básica
-      </button>
-
-      <!-- Tab Educación media superior (NUEVO) -->
-      <button id="tab-media" type="button"
-              onclick="(function(){
-                var b=document.getElementById('panel-basica');
-                var m=document.getElementById('panel-media');
-                var tb=document.getElementById('tab-basica');
-                var tm=document.getElementById('tab-media');
-                b.style.display='none';
-                m.style.display='grid';
-                tm.style.background='#1e40af';
-                tm.style.color='#ffffff';
-                tm.style.borderColor='#1e40af';
-                tb.style.background='#e5e7eb';
-                tb.style.color='#111827';
-                tb.style.borderColor='#cbd5f5';
-              })();"
-              style="border-radius:999px; padding:8px 18px; border:1px solid #cbd5f5;
-                     background:#e5e7eb; color:#111827; font-weight:700; font-size:14px;
-                     cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
-        Educación media superior
-        <span style="font-size:11px; text-transform:uppercase; letter-spacing:.08em;
-                     background:#f97316; color:#fff; padding:2px 6px; border-radius:999px;">
-          Nuevo
-        </span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ================= PANEL 1: EDUCACIÓN BÁSICA ================= -->
-  <div id="panel-basica"
-       class="oferta-panel"
-       style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px;">
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;">
 
     <!-- === 0) ACTUALIZACIÓN DOCENTE === -->
     <article aria-labelledby="c1-title"
@@ -134,10 +29,8 @@
         </div>
         <div>
           <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Diplomado</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
+            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe; padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
+            <span style="font-size:12px; color:#155e75; background:#cffafe; padding:4px 8px; border-radius:999px; font-weight:700;">USICAMM 2025</span>
           </div>
           <h3 id="c1-title" style="font-size:20px; font-weight:800; margin:0;">
             DIPLOMADO EN ACTUALIZACIÓN DOCENTE AFÍN AL NUEVO SISTEMA EDUCATIVO MEXICANO
@@ -168,10 +61,7 @@
         </div>
       </div>
 
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 314).<br>
-        Periodo: Del 01 de Diciembre al 30 de Diciembre
-      </p>
+      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 177).<br>Periodo: Del 18 de Octubre al 18 de Noviembre</p>
 
       <ul style="list-style:none; padding:0; margin:0 0 14px;
                  display:grid; gap:8px; font-size:14px; color:#374151;">
@@ -245,10 +135,8 @@
         </div>
         <div>
           <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
+            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe; padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
+            <span style="font-size:12px; color:#155e75; background:#cffafe; padding:4px 8px; border-radius:999px; font-weight:700;">USICAMM 2025</span>
           </div>
           <h3 id="c2-title" style="font-size:20px; font-weight:800; margin:0;">
             LIBROS DE TEXTO EN EL MARCO DE LA NUEVA ESCUELA MEXICANA. CARACTERÍSTICAS Y METODOLOGÍA
@@ -279,10 +167,7 @@
         </div>
       </div>
 
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este DIplomado se encuentra en el catálogo de cursos del USICAMM (pág. 318).<br>
-        Periodo:  Del 01 de Diciembre al 15 de Diciembre
-      </p>
+      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 179).<br>Periodo:  Del 18 de Octubre al 03 de Noviembre</p>
 
       <ul style="list-style:none; padding:0; margin:0 0 14px;
                  display:grid; gap:8px; font-size:14px; color:#374151;">
@@ -356,10 +241,8 @@
         </div>
         <div>
           <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Diplmado</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
+            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe; padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
+            <span style="font-size:12px; color:#155e75; background:#cffafe; padding:4px 8px; border-radius:999px; font-weight:700;">USICAMM 2025</span>
           </div>
           <h3 id="c3-title" style="font-size:20px; font-weight:800; margin:0;">
             DIPLOMADO EN NUEVOS PARADIGMAS Y ACTUALIZACIÓN EN LA EDUCACIÓN BÁSICA
@@ -390,10 +273,7 @@
         </div>
       </div>
 
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este DIplomado se encuentra en el catálogo de cursos del USICAMM (pág. 318).<br>
-        Periodo: Del 01 de Diciembre al 26 de Diciembre
-      </p>
+      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 180).<br>Periodo: Del 18 de Octubre al 15 de Noviembre</p>
 
       <ul style="list-style:none; padding:0; margin:0 0 14px;
                  display:grid; gap:8px; font-size:14px; color:#374151;">
@@ -467,10 +347,8 @@
         </div>
         <div>
           <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
+            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe; padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
+            <span style="font-size:12px; color:#155e75; background:#cffafe; padding:4px 8px; border-radius:999px; font-weight:700;">USICAMM 2025</span>
           </div>
           <h3 id="c4-title" style="font-size:20px; font-weight:800; margin:0;">
             ENFOQUES DIDÁCTICOS DE LA NUEVA ESCUELA MEXICANA
@@ -501,10 +379,7 @@
         </div>
       </div>
 
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 316).<br>
-        Periodo: Del 01 de Diciembre al 20 de Diciembre
-      </p>
+      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 178).<br>Periodo: Del 18 de Octubre al 10 de Noviembre</p>
 
       <ul style="list-style:none; padding:0; margin:0 0 14px;
                  display:grid; gap:8px; font-size:14px; color:#374151;">
@@ -578,10 +453,8 @@
         </div>
         <div>
           <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
+            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe; padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
+            <span style="font-size:12px; color:#155e75; background:#cffafe; padding:4px 8px; border-radius:999px; font-weight:700;">USICAMM 2025</span>
           </div>
           <h3 id="c5-title" style="font-size:20px; font-weight:800; margin:0;">
             LA NUEVA ESCUELA MEXICANA: FUNDAMENTOS, PLANEACIÓN Y EVALUACIÓN
@@ -612,10 +485,7 @@
         </div>
       </div>
 
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 317).<br>
-        Periodo: Del 01 de Diciembre al 20 de Diciembre
-      </p>
+      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 180).<br>Periodo: Del 18 de Octubre al 10 de Noviembre</p>
 
       <ul style="list-style:none; padding:0; margin:0 0 14px;
                  display:grid; gap:8px; font-size:14px; color:#374151;">
@@ -689,10 +559,8 @@
         </div>
         <div>
           <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
+            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe; padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
+            <span style="font-size:12px; color:#155e75; background:#cffafe; padding:4px 8px; border-radius:999px; font-weight:700;">USICAMM 2025</span>
           </div>
           <h3 id="c6-title" style="font-size:20px; font-weight:800; margin:0;">
             ESTRATEGIAS PARA LA ENSEÑANZA DE LAS MATEMÁTICAS EN EDUCACIÓN BÁSICA
@@ -723,10 +591,7 @@
         </div>
       </div>
 
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 316).<br>
-        Periodo: Del 01 de Diciembre al 20 de Diciembre
-      </p>
+      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 179).<br>Periodo: Del 18 de Octubre al 10 de Noviembre</p>
 
       <ul style="list-style:none; padding:0; margin:0 0 14px;
                  display:grid; gap:8px; font-size:14px; color:#374151;">
@@ -778,46 +643,8 @@
         </div>
       </div>
     </article>
+
   </div>
-
-  <!-- ================= PANEL 2: EDUCACIÓN MEDIA SUPERIOR (NARANJA) ================= -->
-  <div id="panel-media"
-       class="oferta-panel"
-       style="display:none; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px;">
-
-    <!-- === 0M) ACTUALIZACIÓN DOCENTE (MEDIA) === -->
-    <article aria-labelledby="c1m-title"
-             onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,.14)';"
-             onmouseout="this.style.transform='none'; this.style.boxShadow='0 12px 24px rgba(0,0,0,.08)';"
-             style="position:relative; background:#fff; border:1px solid var(--ring); border-radius:18px;
-                    padding:18px; box-shadow:0 12px 24px rgba(0,0,0,.08); transition:all .25s ease; overflow:hidden;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-        <!-- Icono naranja -->
-        <div style="width:56px; height:56px; display:grid; place-items:center; border-radius:14px;
-                    background:linear-gradient(135deg, rgba(249,115,22,.14), rgba(249,115,22,.04));
-                    border:1px solid #fed7aa;">
-          <svg viewBox="0 0 24 24" fill="none" width="30" height="30" aria-hidden="true">
-            <path d="M2 9l10-5 10 5-10 5-10-5Z"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M12 14v7"
-                  stroke="#c2410c" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M7 11v5c0 1 2 3 5 3s5-2 5-3v-5"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <!-- TEXTOS IGUALES (color azul/teal) -->
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Diplomado</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
-          </div>
-          <h3 id="c1m-title" style="font-size:20px; font-weight:800; margin:0;">
-            DIPLOMADO EN ACTUALIZACIÓN DOCENTE AFÍN AL NUEVO SISTEMA EDUCATIVO MEXICANO
-          </h3>
-        </div>
-      </div>
 
       <!-- Contenido igual -->
       <div style="display:flex; gap:14px; align-items:center; color:#475569; font-size:13px; margin-bottom:10px;">
@@ -842,633 +669,3 @@
           <span>(5.0)</span>
         </div>
       </div>
-
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 12).<br>
-        Periodo: Del 01 de Diciembre al 30 de Diciembre
-      </p>
-
-      <ul style="list-style:none; padding:0; margin:0 0 14px;
-                 display:grid; gap:8px; font-size:14px; color:#374151;">
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Modalidad: En línea
-        </li>
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Total de horas: 160
-        </li>
-      </ul>
-
-      <div style="display:flex; align-items:center; justify-content:space-between;
-                  flex-wrap:wrap; gap:10px;">
-        <div style="display:flex; flex-direction:column; line-height:1.2;">
-          <span style="font-size:12px; color:#64748b; font-weight:700; letter-spacing:.2px;">
-            Cuota de recuperación
-          </span>
-          <span style="font-weight:900; font-size:22px;
-                       background:linear-gradient(90deg,#1d4ed8,#0ea5e9);
-                       -webkit-background-clip:text; background-clip:text; color:transparent;">
-            $ 2200 MXN
-          </span>
-        </div>
-        <div style="display:flex; gap:8px;">
-          <a href="https://www.crenjrg.edu.mx/index.php/tadnsem" target="_blank" rel="noopener"
-             onmouseover="this.style.background='#ffedd5'"
-             onmouseout="this.style.background='#fff7ed'"
-             style="background:#fff7ed; color:#1e293b; padding:10px 14px; border-radius:12px;
-                    font-weight:700; text-decoration:none; border:1px solid #fed7aa;">
-            Ver temario
-          </a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLScXXAwFGiNTmz-hPaKUC4SeCdGuDfZuLjBvzacYmWshHgSPFg/viewform"
-             target="_blank" rel="noopener"
-             onclick="gtag('event','conversion',{'send_to':'AW-1760829183/pE9bCNzpqpcbEP_RxxcB','value':1.0,'currency':'MXN'});"
-             onmouseover="this.style.background='#ea580c'; this.style.transform='translateY(-1px)';"
-             onmouseout="this.style.background='#f97316'; this.style.transform='none';"
-             style="background:#f97316; color:#fff; padding:12px 16px; border-radius:12px;
-                    font-weight:800; letter-spacing:.2px; text-decoration:none;
-                    display:inline-flex; align-items:center; gap:8px;
-                    box-shadow:0 10px 18px rgba(249,115,22,.32); transition:all .2s ease;">
-            Registrarme
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- === PROCESO DE ENSEÑANZA Y APRENDIZAJE DE LA LENGUA INGLESA=== -->
-    <article aria-labelledby="c2m-title"
-             onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,.14)';"
-             onmouseout="this.style.transform='none'; this.style.boxShadow='0 12px 24px rgba(0,0,0,.08)';"
-             style="position:relative; background:#fff; border:1px solid var(--ring); border-radius:18px;
-                    padding:18px; box-shadow:0 12px 24px rgba(0,0,0,.08); transition:all .25s ease; overflow:hidden;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-        <!-- Icono naranja -->
-        <div style="width:56px; height:56px; display:grid; place-items:center; border-radius:14px;
-                    background:linear-gradient(135deg, rgba(249,115,22,.14), rgba(249,115,22,.04));
-                    border:1px solid #fed7aa;">
-          <svg viewBox="0 0 24 24" fill="none" width="30" height="30" aria-hidden="true">
-            <path d="M2 9l10-5 10 5-10 5-10-5Z"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M12 14v7"
-                  stroke="#c2410c" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M7 11v5c0 1 2 3 5 3s5-2 5-3v-5"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <!-- TEXTOS IGUALES -->
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Diplomado</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
-          </div>
-          <h3 id="c2m-title" style="font-size:20px; font-weight:800; margin:0;">
-            DIPLOMADO EN PROCESO DE ENSEÑANZA Y APRENDIZAJE DE LA LENGUA INGLESA
-          </h3>
-        </div>
-      </div>
-
-      <!-- Contenido igual -->
-      <div style="display:flex; gap:14px; align-items:center; color:#475569; font-size:13px; margin-bottom:10px;">
-        <div style="display:flex; align-items:center; gap:6px;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M12 3v18M3 12h18" stroke="#f97316" stroke-width="1.8"/>
-          </svg>
-          120 Horas
-        </div>
-        <div style="display:flex; align-items:center; gap:4px;">
-          <svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg>
-          <span>(5.0)</span>
-        </div>
-      </div>
-
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este DIplomado se encuentra en el catálogo de cursos del USICAMM (pág. 312).<br>
-        Periodo:  Del 01 de Diciembre al 26 de Diciembre
-      </p>
-
-      <ul style="list-style:none; padding:0; margin:0 0 14px;
-                 display:grid; gap:8px; font-size:14px; color:#374151;">
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Modalidad: En línea
-        </li>
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Total de horas: 120
-        </li>
-      </ul>
-
-      <div style="display:flex; align-items:center; justify-content:space-between;
-                  flex-wrap:wrap; gap:10px;">
-        <div style="display:flex; flex-direction:column; line-height:1.2;">
-          <span style="font-size:12px; color:#64748b; font-weight:700; letter-spacing:.2px;">
-            Cuota de recuperación
-          </span>
-          <span style="font-weight:900; font-size:22px;
-                       background:linear-gradient(90deg,#1d4ed8,#0ea5e9);
-                       -webkit-background-clip:text; background-clip:text; color:transparent;">
-            $ 1700 MXN
-          </span>
-        </div>
-        <div style="display:flex; gap:8px;">
-          <a href="https://www.crenjrg.edu.mx/index.php/tltnem" target="_blank" rel="noopener"
-             onmouseover="this.style.background='#ffedd5'"
-             onmouseout="this.style.background='#fff7ed'"
-             style="background:#fff7ed; color:#1e293b; padding:10px 14px; border-radius:12px;
-                    font-weight:700; text-decoration:none; border:1px solid #fed7aa;">
-            Ver temario
-          </a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLScp-zaDKylRd91o0oq8wBPR9l7PIY1qT7EnvWhY9pYhkUe-EA/viewform"
-             target="_blank" rel="noopener"
-             onclick="gtag('event','conversion',{'send_to':'AW-1760829183/pE9bCNzpqpcbEP_RxxcB','value':1.0,'currency':'MXN'});"
-             onmouseover="this.style.background='#ea580c'; this.style.transform='translateY(-1px)';"
-             onmouseout="this.style.background='#f97316'; this.style.transform='none';"
-             style="background:#f97316; color:#fff; padding:12px 16px; border-radius:12px;
-                    font-weight:800; letter-spacing:.2px; text-decoration:none;
-                    display:inline-flex; align-items:center; gap:8px;
-                    box-shadow:0 10px 18px rgba(249,115,22,.32); transition:all .2s ease;">
-            Registrarme
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- === 2M) SITUACION LUDICAS PARA EL DESARROLLO DEL PENSAMIENTO MATEMATICO=== -->
-    <article aria-labelledby="c3m-title"
-             onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,.14)';"
-             onmouseout="this.style.transform='none'; this.style.boxShadow='0 12px 24px rgba(0,0,0,.08)';"
-             style="position:relative; background:#fff; border:1px solid var(--ring); border-radius:18px;
-                    padding:18px; box-shadow:0 12px 24px rgba(0,0,0,.08); transition:all .25s ease; overflow:hidden;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-        <!-- Icono naranja -->
-        <div style="width:56px; height:56px; display:grid; place-items:center; border-radius:14px;
-                    background:linear-gradient(135deg, rgba(249,115,22,.14), rgba(249,115,22,.04));
-                    border:1px solid #fed7aa;">
-          <svg viewBox="0 0 24 24" fill="none" width="30" height="30" aria-hidden="true">
-            <path d="M2 9l10-5 10 5-10 5-10-5Z"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M12 14v7"
-                  stroke="#c2410c" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M7 11v5c0 1 2 3 5 3s5-2 5-3v-5"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <!-- TEXTOS IGUALES -->
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
-          </div>
-          <h3 id="c3m-title" style="font-size:20px; font-weight:800; margin:0;">
-            SITUACIÓN LÚDICAS PARA EL DESARROLLO DEL PENSAMIENTO MATEMÁTICO
-          </h3>
-        </div>
-      </div>
-
-      <!-- Contenido igual -->
-      <div style="display:flex; gap:14px; align-items:center; color:#475569; font-size:13px; margin-bottom:10px;">
-        <div style="display:flex; align-items:center; gap:6px;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M12 3v18M3 12h18" stroke="#f97316" stroke-width="1.8"/>
-          </svg>
-          60 Horas
-        </div>
-        <div style="display:flex; align-items:center; gap:4px;">
-          <svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg>
-          <span>(5.0)</span>
-        </div>
-      </div>
-
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 347).<br>
-        Periodo: Del 01 de Diciembre al 17 de Diciembre
-      </p>
-
-      <ul style="list-style:none; padding:0; margin:0 0 14px;
-                 display:grid; gap:8px; font-size:14px; color:#374151;">
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Modalidad: En línea
-        </li>
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Total de horas: 60
-        </li>
-      </ul>
-
-      <div style="display:flex; align-items:center; justify-content:space-between;
-                  flex-wrap:wrap; gap:10px;">
-        <div style="display:flex; flex-direction:column; line-height:1.2;">
-          <span style="font-size:12px; color:#64748b; font-weight:700; letter-spacing:.2px;">
-            Cuota de recuperación
-          </span>
-          <span style="font-weight:900; font-size:22px;
-                       background:linear-gradient(90deg,#1d4ed8,#0ea5e9);
-                       -webkit-background-clip:text; background-clip:text; color:transparent;">
-            $ 1000 MXN
-          </span>
-        </div>
-        <div style="display:flex; gap:8px;">
-          <a href="https://www.crenjrg.edu.mx/index.php/tnpaeb" target="_blank" rel="noopener"
-             onmouseover="this.style.background='#ffedd5'"
-             onmouseout="this.style.background='#fff7ed'"
-             style="background:#fff7ed; color:#1e293b; padding:10px 14px; border-radius:12px;
-                    font-weight:700; text-decoration:none; border:1px solid #fed7aa;">
-            Ver temario
-          </a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1ZluIR3wYPwmnhUTfAdQ67-x3SlrTw0HjhKk1zXBQV79m4A/viewform"
-             target="_blank" rel="noopener"
-             onclick="gtag('event','conversion',{'send_to':'AW-1760829183/pE9bCNzpqpcbEP_RxxcB','value':1.0,'currency':'MXN'});"
-             onmouseover="this.style.background='#ea580c'; this.style.transform='translateY(-1px)';"
-             onmouseout="this.style.background='#f97316'; this.style.transform='none';"
-             style="background:#f97316; color:#fff; padding:12px 16px; border-radius:12px;
-                    font-weight:800; letter-spacing:.2px; text-decoration:none;
-                    display:inline-flex; align-items:center; gap:8px;
-                    box-shadow:0 10px 18px rgba(249,115,22,.32); transition:all .2s ease;">
-            Registrarme
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- === 3M) ENFOQUES DIDÁCTICOS (MEDIA) === -->
-    <article aria-labelledby="c4m-title"
-             onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,.14)';"
-             onmouseout="this.style.transform='none'; this.style.boxShadow='0 12px 24px rgba(0,0,0,.08)';"
-             style="position:relative; background:#fff; border:1px solid var(--ring); border-radius:18px;
-                    padding:18px; box-shadow:0 12px 24px rgba(0,0,0,.08); transition:all .25s ease; overflow:hidden;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-        <!-- Icono naranja -->
-        <div style="width:56px; height:56px; display:grid; place-items:center; border-radius:14px;
-                    background:linear-gradient(135deg, rgba(249,115,22,.14), rgba(249,115,22,.04));
-                    border:1px solid #fed7aa;">
-          <svg viewBox="0 0 24 24" fill="none" width="30" height="30" aria-hidden="true">
-            <path d="M2 9l10-5 10 5-10 5-10-5Z"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M12 14v7"
-                  stroke="#c2410c" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M7 11v5c0 1 2 3 5 3s5-2 5-3v-5"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <!-- TEXTOS IGUALES -->
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
-          </div>
-          <h3 id="c4m-title" style="font-size:20px; font-weight:800; margin:0;">
-            ENFOQUES DIDÁCTICOS DE LA NUEVA ESCUELA MEXICANA
-          </h3>
-        </div>
-      </div>
-
-      <!-- Contenido igual -->
-      <div style="display:flex; gap:14px; align-items:center; color:#475569; font-size:13px; margin-bottom:10px;">
-        <div style="display:flex; align-items:center; gap:6px;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M12 3v18M3 12h18" stroke="#f97316" stroke-width="1.8"/>
-          </svg>
-          80 Horas
-        </div>
-        <div style="display:flex; align-items:center; gap:4px;">
-          <svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg>
-          <span>(5.0)</span>
-        </div>
-      </div>
-
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 132).<br>
-        Periodo: Del 01 de Diciembre al 20 de Diciembre
-      </p>
-
-      <ul style="list-style:none; padding:0; margin:0 0 14px;
-                 display:grid; gap:8px; font-size:14px; color:#374151;">
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Modalidad: En línea
-        </li>
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Total de horas: 80
-        </li>
-      </ul>
-
-      <div style="display:flex; align-items:center; justify-content:space-between;
-                  flex-wrap:wrap; gap:10px;">
-        <div style="display:flex; flex-direction:column; line-height:1.2;">
-          <span style="font-size:12px; color:#64748b; font-weight:700; letter-spacing:.2px;">
-            Cuota de recuperación
-          </span>
-          <span style="font-weight:900; font-size:22px;
-                       background:linear-gradient(90deg,#1d4ed8,#0ea5e9);
-                       -webkit-background-clip:text; background-clip:text; color:transparent;">
-            $ 1200 MXN
-          </span>
-        </div>
-        <div style="display:flex; gap:8px;">
-          <a href="https://www.crenjrg.edu.mx/index.php/tednem" target="_blank" rel="noopener"
-             onmouseover="this.style.background='#ffedd5'"
-             onmouseout="this.style.background='#fff7ed'"
-             style="background:#fff7ed; color:#1e293b; padding:10px 14px; border-radius:12px;
-                    font-weight:700; text-decoration:none; border:1px solid #fed7aa;">
-            Ver temario
-          </a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSf301egbZUT3-pAhGcJx8QSd7tL3esRnYEfhJihzzwtvqk1SA/viewform"
-             target="_blank" rel="noopener"
-             onclick="gtag('event','conversion',{'send_to':'AW-1760829183/pE9bCNzpqpcbEP_RxxcB','value':1.0,'currency':'MXN'});"
-             onmouseover="this.style.background='#ea580c'; this.style.transform='translateY(-1px)';"
-             onmouseout="this.style.background='#f97316'; this.style.transform='none';"
-             style="background:#f97316; color:#fff; padding:12px 16px; border-radius:12px;
-                    font-weight:800; letter-spacing:.2px; text-decoration:none;
-                    display:inline-flex; align-items:center; gap:8px;
-                    box-shadow:0 10px 18px rgba(249,115,22,.32); transition:all .2s ease;">
-            Registrarme
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- === 4M) LA NUEVA ESCUELA MEXICANA: FUNDAMENTOS=== -->
-    <article aria-labelledby="c5m-title"
-             onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,.14)';"
-             onmouseout="this.style.transform='none'; this.style.boxShadow='0 12px 24px rgba(0,0,0,.08)';"
-             style="position:relative; background:#fff; border:1px solid var(--ring); border-radius:18px;
-                    padding:18px; box-shadow:0 12px 24px rgba(0,0,0,.08); transition:all .25s ease; overflow:hidden;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-        <!-- Icono naranja -->
-        <div style="width:56px; height:56px; display:grid; place-items:center; border-radius:14px;
-                    background:linear-gradient(135deg, rgba(249,115,22,.14), rgba(249,115,22,.04));
-                    border:1px solid #fed7aa;">
-          <svg viewBox="0 0 24 24" fill="none" width="30" height="30" aria-hidden="true">
-            <path d="M2 9l10-5 10 5-10 5-10-5Z"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M12 14v7"
-                  stroke="#c2410c" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M7 11v5c0 1 2 3 5 3s5-2 5-3v-5"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <!-- TEXTOS IGUALES -->
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
-          </div>
-          <h3 id="c5m-title" style="font-size:20px; font-weight:800; margin:0;">
-            LA NUEVA ESCUELA MEXICANA: FUNDAMENTOS, PLANEACIÓN Y EVALUACIÓN
-          </h3>
-        </div>
-      </div>
-
-      <!-- Contenido igual -->
-      <div style="display:flex; gap:14px; align-items:center; color:#475569; font-size:13px; margin-bottom:10px;">
-        <div style="display:flex; align-items:center; gap:6px;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M12 3v18M3 12h18" stroke="#f97316" stroke-width="1.8"/>
-          </svg>
-          80 Horas
-        </div>
-        <div style="display:flex; align-items:center; gap:4px;">
-          <svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg>
-          <span>(5.0)</span>
-        </div>
-      </div>
-
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 242).<br>
-        Periodo: Del 01 de Diciembre al 20 de Diciembre
-      </p>
-
-      <ul style="list-style:none; padding:0; margin:0 0 14px;
-                 display:grid; gap:8px; font-size:14px; color:#374151;">
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Modalidad: En línea
-        </li>
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Total de horas: 80
-        </li>
-      </ul>
-
-      <div style="display:flex; align-items:center; justify-content:space-between;
-                  flex-wrap:wrap; gap:10px;">
-        <div style="display:flex; flex-direction:column; line-height:1.2;">
-          <span style="font-size:12px; color:#64748b; font-weight:700; letter-spacing:.2px;">
-            Cuota de recuperación
-          </span>
-          <span style="font-weight:900; font-size:22px;
-                       background:linear-gradient(90deg,#1d4ed8,#0ea5e9);
-                       -webkit-background-clip:text; background-clip:text; color:transparent;">
-            $ 1200 MXN
-          </span>
-        </div>
-        <div style="display:flex; gap:8px;">
-          <a href="https://www.crenjrg.edu.mx/index.php/tnemfpe" target="_blank" rel="noopener"
-             onmouseover="this.style.background='#ffedd5'"
-             onmouseout="this.style.background='#fff7ed'"
-             style="background:#fff7ed; color:#1e293b; padding:10px 14px; border-radius:12px;
-                    font-weight:700; text-decoration:none; border:1px solid #fed7aa;">
-            Ver temario
-          </a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeMG3qQ3wQ0oh4fOwGeY79Mt9xWo8iKnoU3GCBu_dq2voNvjQ/viewform"
-             target="_blank" rel="noopener"
-             onclick="gtag('event','conversion',{'send_to':'AW-1760829183/pE9bCNzpqpcbEP_RxxcB','value':1.0,'currency':'MXN'});"
-             onmouseover="this.style.background='#ea580c'; this.style.transform='translateY(-1px)';"
-             onmouseout="this.style.background='#f97316'; this.style.transform='none';"
-             style="background:#f97316; color:#fff; padding:12px 16px; border-radius:12px;
-                    font-weight:800; letter-spacing:.2px; text-decoration:none;
-                    display:inline-flex; align-items:center; gap:8px;
-                    box-shadow:0 10px 18px rgba(249,115,22,.32); transition:all .2s ease;">
-            Registrarme
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- === LIBROS DE TEXTO EN EL MARCO DE LA NUEVA ESCUELA MEXICANA === -->
-    <article aria-labelledby="c6m-title"
-             onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,.14)';"
-             onmouseout="this.style.transform='none'; this.style.boxShadow='0 12px 24px rgba(0,0,0,.08)';"
-             style="position:relative; background:#fff; border:1px solid var(--ring); border-radius:18px;
-                    padding:18px; box-shadow:0 12px 24px rgba(0,0,0,.08); transition:all .25s ease; overflow:hidden;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-        <!-- Icono naranja -->
-        <div style="width:56px; height:56px; display:grid; place-items:center; border-radius:14px;
-                    background:linear-gradient(135deg, rgba(249,115,22,.14), rgba(249,115,22,.04));
-                    border:1px solid #fed7aa;">
-          <svg viewBox="0 0 24 24" fill="none" width="30" height="30" aria-hidden="true">
-            <path d="M2 9l10-5 10 5-10 5-10-5Z"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M12 14v7"
-                  stroke="#c2410c" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M7 11v5c0 1 2 3 5 3s5-2 5-3v-5"
-                  stroke="#ea580c" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <!-- TEXTOS IGUALES -->
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
-            <span style="font-size:12px; color:#1e3a8a; background:#dbeafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">Curso</span>
-            <span style="font-size:12px; color:#155e75; background:#cffafe;
-                         padding:4px 8px; border-radius:999px; font-weight:700;">2026-2027</span>
-          </div>
-          <h3 id="c6m-title" style="font-size:20px; font-weight:800; margin:0;">
-           LIBROS DE TEXTO EN EL MARCO D ELA NUEVA ESCUELA MEXICANA.CARACTERÍSTICAS Y METODOLOGÍA
-          </h3>
-        </div>
-      </div>
-
-      <!-- Contenido igual -->
-      <div style="display:flex; gap:14px; align-items:center; color:#475569; font-size:13px; margin-bottom:10px;">
-        <div style="display:flex; align-items:center; gap:6px;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M12 3v18M3 12h18" stroke="#f97316" stroke-width="1.8"/>
-          </svg>
-          40 Horas
-        </div>
-        <div style="display:flex; align-items:center; gap:4px;">
-          <svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg><svg viewBox="0 0 20 20" width="14" height="14" fill="#fbbf24">
-            <polygon points="10,1 12.6,7.2 19.2,7.3 13.9,11.3 15.9,17.9 10,14.1 4.1,17.9 6.1,11.3 0.8,7.3 7.4,7.2"/>
-          </svg>
-          <span>(5.0)</span>
-        </div>
-      </div>
-
-      <p style="color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 12px;">
-        Este curso se encuentra en el catálogo de cursos del USICAMM (pág. 250).<br>
-        Periodo: Del 01 de Diciembre al 15 de Diciembre
-      </p>
-
-      <ul style="list-style:none; padding:0; margin:0 0 14px;
-                 display:grid; gap:8px; font-size:14px; color:#374151;">
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Modalidad: En línea
-        </li>
-        <li style="display:flex; gap:8px; align-items:flex-start;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
-            <path d="M20 6 9 17l-5-5" stroke="#16a34a"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg> Total de horas: 40
-        </li>
-      </ul>
-
-      <div style="display:flex; align-items:center; justify-content:space-between;
-                  flex-wrap:wrap; gap:10px;">
-        <div style="display:flex; flex-direction:column; line-height:1.2;">
-          <span style="font-size:12px; color:#64748b; font-weight:700; letter-spacing:.2px;">
-            Cuota de recuperación
-          </span>
-          <span style="font-weight:900; font-size:22px;
-                       background:linear-gradient(90deg,#1d4ed8,#0ea5e9);
-                       -webkit-background-clip:text; background-clip:text; color:transparent;">
-            $ 800 MXN
-          </span>
-        </div>
-        <div style="display:flex; gap:8px;">
-          <a href="https://www.crenjrg.edu.mx/index.php/teemeb" target="_blank" rel="noopener"
-             onmouseover="this.style.background='#ffedd5'"
-             onmouseout="this.style.background='#fff7ed'"
-             style="background:#fff7ed; color:#1e293b; padding:10px 14px; border-radius:12px;
-                    font-weight:700; text-decoration:none; border:1px solid #fed7aa;">
-            Ver temario
-          </a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeMjdV1hcey5n-wknmjsAq21P7paeZBEh1vxDslBjfS7JOo8w/viewform"
-             target="_blank" rel="noopener"
-             onclick="gtag('event','conversion',{'send_to':'AW-1760829183/pE9bCNzpqpcbEP_RxxcB','value':1.0,'currency':'MXN'});"
-             onmouseover="this.style.background='#ea580c'; this.style.transform='translateY(-1px)';"
-             onmouseout="this.style.background='#f97316'; this.style.transform='none';"
-             style="background:#f97316; color:#fff; padding:12px 16px; border-radius:12px;
-                    font-weight:800; letter-spacing:.2px; text-decoration:none;
-                    display:inline-flex; align-items:center; gap:8px;
-                    box-shadow:0 10px 18px rgba(249,115,22,.32); transition:all .2s ease;">
-            Registrarme
-          </a>
-        </div>
-      </div>
-    </article>
-  </div>
-
-  <p style="margin-top:18px; color:#475569; font-size:12px; text-align:center;">&nbsp;</p>
-</div>
